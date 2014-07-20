@@ -1,0 +1,45 @@
+{
+  "name": "imvvm",
+  "version": "0.8.2",
+  "homepage": "https://github.com/entrendipity/imvvm",
+  "authors": [
+    "Frank Panetta <frank.panetta@entrendipity.com.au>"
+  ],
+  "description": "Immutable MVVM for React",
+  "main": "dist/imvvm.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "react",
+    "mvvm",
+    "react",
+    "mvc",
+    "react",
+    "routing",
+    "pushState",
+    "imvvm"
+  ],
+  "dependencies": {
+    "page": ">=1.3.7"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.8.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.8.2",
+    "commit": "eeedf5aa15e43950b329ed99c2f503cf44789e78"
+  },
+  "_source": "git://github.com/entrendipity/imvvm.git",
+  "_target": "~0.8.0",
+  "_originalSource": "imvvm"
+}
