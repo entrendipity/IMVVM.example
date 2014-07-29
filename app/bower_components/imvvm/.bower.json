@@ -1,6 +1,6 @@
 {
   "name": "imvvm",
-  "version": "0.8.2",
+  "version": "0.8.4",
   "homepage": "https://github.com/entrendipity/imvvm",
   "authors": [
     "Frank Panetta <frank.panetta@entrendipity.com.au>"
@@ -33,11 +33,11 @@
     "test",
     "tests"
   ],
-  "_release": "0.8.2",
+  "_release": "0.8.4",
   "_resolution": {
     "type": "version",
-    "tag": "0.8.2",
-    "commit": "eeedf5aa15e43950b329ed99c2f503cf44789e78"
+    "tag": "0.8.4",
+    "commit": "72767567d8ab4a0479c71a656a39a1924bf95f3e"
   },
   "_source": "git://github.com/entrendipity/imvvm.git",
   "_target": "~0.8.0",

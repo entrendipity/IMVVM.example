@@ -794,10 +794,10 @@ var mixin = {
 	},
 	pushState: {
 		componentDidMount: function(){
-			$(this.getDOMNode()).click(this.onclick);
+			this.getDOMNode().addEventListener('click', this.onclick);
 		},
 		componentWillUnmount: function(){
-			$(this.getDOMNode()).unbind('click');
+			this.getDOMNode().removeEventListener('click');
 		},
 		/**
 		* Event button.
@@ -1002,8 +1002,7 @@ exports.getInitialState = function(appNamespace, domainModel, stateChangedHandle
 			pushStateChanged = false;
 
     if(arguments.length < 2){
-      stateChangedHandler(appState);
-      return;
+      newState = appState;
     }
 
     if(typeof forget === 'function'){
@@ -1218,12 +1217,12 @@ exports.getInitialState = function(appNamespace, domainModel, stateChangedHandle
 				callback(e);
 				return;
 			}
-		} finally {		
-			calledBack = false;
-			transientState = {};
-			processedState = {};
 		}
 
+		calledBack = false;
+		transientState = {};
+		processedState = {};
+	
     //All the work is done! -> Notify the View
     stateChangedHandler(appState);
 
