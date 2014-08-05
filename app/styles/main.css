@@ -31,3 +31,16 @@ body {
 .btn{
 margin-left:10px;
 }
+
+@media (max-width: 767px) {
+    .media#xsmall {/**/}
+}
+@media (min-width: 768px) and (max-width: 991px)  {
+    .media#small {/**/}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .media#medium {/**/}
+}
+@media (min-width: 1200px) {
+    .media#large {/**/}
+}

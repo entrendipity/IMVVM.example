@@ -9,7 +9,7 @@
 'use strict';
 
 var ApplicationView = React.createClass({
-  mixins: [IMVVM.mixin.main, IMVVM.mixin.pushState],
+  mixins: [IMVVM.mixin.main, IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery],
 
   render: function(){
 

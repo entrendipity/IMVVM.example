@@ -34,6 +34,7 @@ var NavBarView = React.createClass({
 		return (
 			<nav className="navbar navbar-default" role="navigation">
 			  <div className="container-fluid">
+			    <h5 className="pull-right">Size: <b>{this.props.appContext.media}</b></h5>
 			    <div className="navbar-header">
 			      <button onClick={this.toggleMenu} type="button"
 			      className="navbar-toggle"

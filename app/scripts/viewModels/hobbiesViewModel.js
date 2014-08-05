@@ -21,7 +21,7 @@ var HobbiesViewModel = (function(){
     return uuid;
   };
 
-  var hobbyStateChangedHandler = function(nextState/*, callback*/){
+  var hobbyStateChangeHandler = function(nextState/*, callback*/){
 
     var newState = {};
     var hobbiesArr = this.hobbies.map(function(hobby){
@@ -41,7 +41,7 @@ var HobbiesViewModel = (function(){
   };
 
   //Use this if state change is triggered by others action
-  var onPersonChangedHandler = function(nextState, prevState, field, context,
+  var onPersonChangeHandler = function(nextState, prevState, field, context,
       nextPath, prevPath){
     if(this.current !== void(0) && context === 'persons' &&
   (nextState.id !== prevState.id || nextPath !== prevPath)){
@@ -50,7 +50,7 @@ var HobbiesViewModel = (function(){
   };
 
   var Hobby = function(){
-    return new HobbyModel(hobbyStateChangedHandler).apply(this, arguments);
+    return new HobbyModel(hobbyStateChangeHandler).apply(this, arguments);
   };
 
   var hobbyRouteHandler = function(params, path, pathId, ctx){
@@ -75,7 +75,7 @@ var HobbiesViewModel = (function(){
         'persons': {
           alias: 'personsContext', //optional - will be added to prototype
           fields: { //optional
-            'selectedPerson': onPersonChangedHandler
+            'selectedPerson': onPersonChangeHandler
           }
         },
         'busy': {

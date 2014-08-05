@@ -15,6 +15,13 @@ var DomainViewModel = IMVVM.createDomainViewModel({
     };
   },
 
+  /* Required if mediaQuery IMVVM.mixin.mediaQuery is used */
+  mediaChangeHandler: function(id, mql, initializing){
+    if(mql.matches){
+      this.setState({mql:mql, media: id});
+    }
+  },
+
   //dataContext keys define the dataContext names that will appear in
   //the View and associates a ViewModel.
   persons: {
@@ -38,6 +45,18 @@ var DomainViewModel = IMVVM.createDomainViewModel({
     }
   },
 
+  mql: {
+    get: function(){
+      return this.state.mql;
+    }
+  },
+
+  media: {
+    get: function(){
+      return this.state.media;
+    }
+  },
+  
   /*
     If the initial path needs to be '/person/:id' then it could be set in
     the path getter and therefore wouldn't need to be set in getInitialState

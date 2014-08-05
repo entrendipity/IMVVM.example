@@ -5,7 +5,7 @@
 
 var PersonsViewModel = (function(){
 
-  var personStateChangedHandler = function(nextState/*, callback*/){
+  var personStateChangeHandler = function(nextState/*, callback*/){
     var persons = {};
     persons.collection = this.collection.map(function(person){
       if(person.id === nextState.id){
@@ -18,7 +18,7 @@ var PersonsViewModel = (function(){
   };
 
   var Person = function(){
-    return new PersonModel(personStateChangedHandler).apply(this, arguments);
+    return new PersonModel(personStateChangeHandler).apply(this, arguments);
   };
 
   var personRouteHandler = function(params, path, pathId, ctx){
