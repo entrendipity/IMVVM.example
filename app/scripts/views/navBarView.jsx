@@ -29,7 +29,7 @@ var NavBarView = React.createClass({
 	},
 	render: function(){
 		var onlineBtnTxt = this.props.appContext.online ? "Go offline" : "Go online";
-		var onlineBtnClass = this.props.appContext.online ? "btn btn-success": "btn btn-danger";
+		var onlineBtnClass = this.props.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
 		var noOfPeople = this.props.appContext.personCount;
 		return (
 			<nav className="navbar navbar-default" role="navigation">
@@ -46,7 +46,7 @@ var NavBarView = React.createClass({
 			        <span className="icon-bar"></span>
 			      </button>
 			      <a className="navbar-brand" href="/people">
-			      	IMVVM Demo has {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
+			      	IMVVM Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
 			      </a>
 			    </div>
 
@@ -58,12 +58,12 @@ var NavBarView = React.createClass({
 			      <form className="navbar-form pull-right" role="search">
 			        <button onClick={this.undo}
 								disabled={!this.props.appContext.canRevert}
-								className="btn btn-default">
+								className="btn btn-default btn-sm">
 			        Undo
 			        </button>
 			         <button onClick={this.redo}
 								disabled={!this.props.appContext.canAdvance}
-								className="btn btn-default">
+								className="btn btn-default btn-sm">
 			        Redo
 			        </button>
 			        <button onClick={this.toggleOnlineState}

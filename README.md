@@ -9,7 +9,10 @@ Documentation can be found [here.](https://github.com/entrendipity/imvvm/wiki)
 * clone or download repository
 * open console
 * navigate to download directory
-* run `npm install` - may require sudo
+* run `npm install`
+* cd app
+* run `bower install`
+* cd ..
 * run `grunt serve`
 
 _n.b. The application uses client-side pushState routing and does not reference a server. If you lose the application, navigate to localhost:9000 and not localhost:9000/people to reinitialize the application. This is not how it would work when using a remote server._
