@@ -43,8 +43,9 @@ var HobbiesViewModel = (function(){
   //Use this if state change is triggered by others action
   var onPersonChangeHandler = function(nextState, prevState, field, context,
       nextPath, prevPath){
+
     if(this.current !== void(0) && context === 'persons' &&
-  (nextState.id !== prevState.id || nextPath !== prevPath)){
+      (nextState === void(0) || nextState.id !== prevState.id || nextPath !== prevPath)){
       return { hobbies: { current: void(0) }, busy: false };
     }
   };
