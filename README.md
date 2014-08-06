@@ -5,6 +5,8 @@ IMVVM Reference Implementation
 
 Documentation can be found [here.](https://github.com/entrendipity/imvvm/wiki)
 
+[[https://github.com/entrendipity/IMVVM.example/ScreenShot_Example.png|alt=IMVVM Example Application]]
+
 ## Setup Example Application
 * clone or download repository
 * open console
@@ -18,7 +20,6 @@ Documentation can be found [here.](https://github.com/entrendipity/imvvm/wiki)
 _n.b. The application uses client-side pushState routing and does not reference a server. If you lose the application, navigate to localhost:9000 and not localhost:9000/people to reinitialize the application. This is not how it would work when using a remote server._
 
 ## Author
-Entrendipity  - [Follow @entrendipity](https://twitter.com/intent/follow?screen_name=entrendipity)  
 Frank Panetta  - [Follow @fattenap](https://twitter.com/intent/follow?screen_name=fattenap)
 
 ##License
