@@ -5,7 +5,7 @@ IMVVM Reference Implementation
 
 Documentation can be found [here.](https://github.com/entrendipity/imvvm/wiki)
 
-[[https://github.com/entrendipity/IMVVM.example/ScreenShot_Example.png|alt=IMVVM Example Application]]
+[[ScreenShot_Example.png|alt=IMVVM Example Application]]
 
 ## Setup Example Application
 * clone or download repository
