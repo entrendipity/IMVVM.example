@@ -7,7 +7,7 @@ This example application is a reference implementation to be read with the [Deve
 
 IMVVM Documentation can be found [here.](https://github.com/entrendipity/imvvm/wiki)  
 #### Screen shot
-![Screen shot](/ScreenShot_Example.png)
+[[ScreenShot_Example.png]]
 
 ## Setup Example Application
 * clone or download repository
