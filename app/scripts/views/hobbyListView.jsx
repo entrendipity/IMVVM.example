@@ -23,15 +23,15 @@ var HobbyListView = React.createClass({
 	updateName: function(e){
 		this.props.appContext.hobbies.current.name = e.target.value;
 	},
-	shouldComponentUpdate: function(nextProps, nextState){
-		if("hobbies" in nextProps.appContext.state.dataContextWillUpdate){
-			return true;
-		}
-		if("persons" in nextProps.appContext.state.dataContextWillUpdate){
-			var nextPerson = nextProps.appContext.state.dataContextWillUpdate.persons.selectedPerson;
-			return nextPerson.id != this.props.appContext.persons.selectedPerson.id;
-		}
-	},
+	// shouldComponentUpdate: function(nextProps, nextState){
+	// 	if("hobbies" in nextProps.appContext.state.dataContextWillUpdate){
+	// 		return true;
+	// 	}
+	// 	if("persons" in nextProps.appContext.state.dataContextWillUpdate){
+	// 		var nextPerson = nextProps.appContext.state.dataContextWillUpdate.persons.selectedPerson;
+	// 		return nextPerson.id != this.props.appContext.persons.selectedPerson.id;
+	// 	}
+	// },
 	render: function() {
 		var app = this.props.appContext;
 		var collection = this.props.appContext.hobbies.hobbies;
