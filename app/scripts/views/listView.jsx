@@ -21,6 +21,8 @@ var ListView = React.createClass({
 	deletePerson: function(uid, e){
 		this.props.appContext.persons.deletePerson(uid);
 	},
+	
+
 	render: function() {
 		var app = this.props.appContext;
 		var collection = this.props.appContext.persons.collection;

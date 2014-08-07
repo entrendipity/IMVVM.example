@@ -20,7 +20,7 @@ var FormView = React.createClass({
 	},
 	updateDOB: function(e){
 		this.props.appContext.persons.selectedPerson.dob = e.target.value;
-	},
+	},	
 	render: function() {
 		var current = this.props.appContext.persons.selectedPerson;
 

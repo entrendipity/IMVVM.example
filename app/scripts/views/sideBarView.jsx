@@ -12,7 +12,6 @@ var SideBarView = React.createClass({
 	addPerson: function(value){
 		this.props.appContext.persons.addPerson(value);
 	},
-
 	render: function(){
 		return (
 			<div>
