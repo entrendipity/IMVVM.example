@@ -1,6 +1,4 @@
 
 .tmp/
 
-node_modules/
-
-app/bower_components/
+todomvc/js/bundle.js
