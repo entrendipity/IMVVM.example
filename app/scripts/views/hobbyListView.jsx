@@ -29,8 +29,11 @@ var HobbyListView = React.createClass({
 		}
 		if("persons" in nextProps.appContext.state.dataContextWillUpdate){
 			var nextPerson = nextProps.appContext.state.dataContextWillUpdate.persons.selectedPerson;
-			return nextPerson.id != this.props.appContext.persons.selectedPerson.id;
+			var selectedPerson = this.props.appContext.persons.selectedPerson;
+			return nextPerson.id != selectedPerson.id || 
+				nextPerson.hobbies.length !== selectedPerson.hobbies.length;
 		}
+		return false;
 	},
 	render: function() {
 		var app = this.props.appContext;
