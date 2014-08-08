@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var DomainViewModel = require('./viewModels/TodoDomainViewModel');
+var TodoDomainViewModel = require('./viewModels/TodoDomainViewModel');
 var TodoApp = require('./components/TodoApp.react');
 
 React.renderComponent(
-  <TodoApp domainModel={DomainViewModel}/>,
+  <TodoApp domainModel={TodoDomainViewModel}/>,
   document.getElementById('todoapp')
 );

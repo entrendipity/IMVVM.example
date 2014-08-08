@@ -1,10 +1,10 @@
 var IMVVM = require('imvvm');
 var TodoViewModel = require('./TodoViewModel');
 
-var DomainViewModel = IMVVM.createDomainViewModel({
+var TodoDomainViewModel = IMVVM.createDomainViewModel({
 
   /**
-  * Expose the TodoViewModel to the "Controller-View" as `Todos` DataContext.
+  * Expose the TodoViewModel to the "Controller-View" as `Todos` Data Context.
   * This will be attached to this.state.domainDataContext
   */
   Todos: {
@@ -16,4 +16,4 @@ var DomainViewModel = IMVVM.createDomainViewModel({
 
 });
 
-module.exports = DomainViewModel;
+module.exports = TodoDomainViewModel;

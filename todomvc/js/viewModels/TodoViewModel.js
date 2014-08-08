@@ -64,16 +64,7 @@ var TodoViewModel = IMVVM.createViewModel({
 
   /**
    * @param  {string} id The ID of the ToDo item
-   * @param  {string} text
-  //  */
-  // updateText: function(id, text) {
-  //   AppDispatcher.handleViewAction({
-  //     actionType: TodoConstants.TODO_UPDATE_TEXT,
-  //     id: id,
-  //     text: text
-  //   });
-  // },
-
+   */
   selectToEdit: function(id) {
     var nextState = {};
     nextState.selectedTodo = new Todo(this.todos[id]);
