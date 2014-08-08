@@ -9,20 +9,12 @@
 'use strict';
 
 var HobbyListView = React.createClass({
-	handleSelection: function(uid, e){
-		e.preventDefault();
-		e.stopPropagation();
-		this.props.appContext.hobbies.selectHobby(uid);
-	},
 	addHobby: function(value, e){
 		this.props.appContext.hobbies.addHobby(value);
 	},
-	deleteHobby: function(uid, e){
-		this.props.appContext.hobbies.deleteHobby(uid);
-	},
-	updateName: function(e){
-		this.props.appContext.hobbies.current.name = e.target.value;
-	},
+  updateName: function(e){
+    this.props.appContext.hobbies.current.name = e.target.value;
+  },
 	shouldComponentUpdate: function(nextProps, nextState){
 		if("hobbies" in nextProps.appContext.state.dataContextWillUpdate){
 			return true;
@@ -41,29 +33,10 @@ var HobbyListView = React.createClass({
 		var current = this.props.appContext.hobbies.current;
 
 		var list = collection.map(function(hobby){
-			if(current && (current.id === hobby.id)){
-				return (
-					<a
-					onClick={this.handleSelection.bind(this, hobby.id)}
-					key={hobby.id}
-					href="#"
-					className="list-group-item active">
-					    {hobby.name}
-					    <DeleteButton funcDelete={this.deleteHobby.bind(this, hobby.id)} />
-					</a>
-				);
-			}
-			return (
-				<a
-				onClick={this.handleSelection.bind(this, hobby.id)}
-				key={hobby.id}
-				href="#"
-				className="list-group-item">
-				    {hobby.name}
-				    <DeleteButton funcDelete={this.deleteHobby.bind(this, hobby.id)} />
-				</a>
-			);
-		}.bind(this));
+				return <HobbyListItemView hobby={hobby}
+					selected={current && (current.id === hobby.id)}
+					appContext={app} />
+		});
 
 		return (
 			<div>
