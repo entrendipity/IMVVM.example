@@ -4,7 +4,7 @@ var TodoModel = IMVVM.createModel({
 
   getInitialState: function(){
     return {
-      id: this.id || Date.now(),
+      id: this.id || Date.now().toString(),
       complete: false
     };
   },

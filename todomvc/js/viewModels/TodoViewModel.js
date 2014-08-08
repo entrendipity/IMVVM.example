@@ -116,8 +116,12 @@ var TodoViewModel = IMVVM.createViewModel({
    * @param  {string} id
    */
   destroy: function(id) {
-    var nextTodos = IMVVM.extend(this.todos);
-    delete nextTodos[id];
+    var nextTodos = {};
+    for(var key in this.todos){
+      if(this.todos.hasOwnProperty(key) && key !== id){
+        nextTodos[key] = this.todos[key];
+      }
+    }
     this.setState({todos: nextTodos});
   },
 
