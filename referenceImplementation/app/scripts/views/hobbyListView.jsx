@@ -33,7 +33,7 @@ var HobbyListView = React.createClass({
 		var current = this.props.appContext.hobbies.current;
 
 		var list = collection.map(function(hobby){
-				return <HobbyListItemView hobby={hobby}
+				return <HobbyListItemView key={hobby.id} hobby={hobby}
 					selected={current && (current.id === hobby.id)}
 					appContext={app} />
 		});

@@ -3,7 +3,7 @@
 
 'use strict';
 
-var HobbyModel = IMVVM.createModel({
+var HobbyClass = IMVVM.createModelClass({ // short form => createMClass()
 
   id: {
     kind: 'uid',

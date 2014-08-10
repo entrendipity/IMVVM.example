@@ -11,6 +11,6 @@
 
 //enableUndo is optional - default is false
 //if getRoutes() is set in a ViewModel enableUndo defaults to true
-React.renderComponent(<ApplicationView
-	domainModel={DomainViewModel}/>,
+React.renderComponent(<ControllerView
+	controllerViewModel={ControllerViewModel} />,
 	document.getElementById('container'));

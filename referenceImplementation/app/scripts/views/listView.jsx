@@ -18,7 +18,7 @@ var ListView = React.createClass({
 		var appContext = this.props.appContext;
 		var list = collection.map(function(person){
 			return (
-				<ListItemView appContext={appContext} 
+				<ListItemView key={person.id} appContext={appContext} 
 					person={person} selected={!!current && current.id === person.id} />
 			);
 		});

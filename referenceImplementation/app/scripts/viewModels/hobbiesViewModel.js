@@ -51,7 +51,7 @@ var HobbiesViewModel = (function(){
   };
 
   var Hobby = function(){
-    return new HobbyModel(hobbyStateChangeHandler).apply(this, arguments);
+    return new HobbyClass(hobbyStateChangeHandler).apply(this, arguments);
   };
 
   var hobbyRouteHandler = function(params, path, pathId, ctx){
@@ -69,7 +69,7 @@ var HobbiesViewModel = (function(){
 
   };
 
-  var hobbiesViewModel = IMVVM.createViewModel({
+  var HobbiesViewModelClass = IMVVM.createViewModelClass({  //short form => createVMClass()
 
     getWatchedState: function() {
       return {
@@ -187,5 +187,5 @@ var HobbiesViewModel = (function(){
       }
     }
   });
-  return hobbiesViewModel;
+  return HobbiesViewModelClass;
 })();

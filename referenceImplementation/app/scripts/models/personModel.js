@@ -1,12 +1,12 @@
 /*jshint unused: false */
-/* global IMVVM, DataService, HobbyModel */
+/* global IMVVM, DataService, HobbyClass */
 
 'use strict';
 
 var PersonModel = (function(){
 
   var Hobby = function(){
-    return new HobbyModel().apply(this, arguments);
+    return new HobbyClass().apply(this, arguments);
   };
 
   var uuid = function () {
@@ -32,7 +32,7 @@ var PersonModel = (function(){
     return isNaN(age) ? 'Enter your Birthday' : age + ' years old';
   };
 
-  var personModel = IMVVM.createModel({
+  var PersonClass = IMVVM.createModelClass({
 
     getInitialState: function(){
 
@@ -165,5 +165,5 @@ var PersonModel = (function(){
     },
 
   });
-  return personModel;
+  return PersonClass;
 })();

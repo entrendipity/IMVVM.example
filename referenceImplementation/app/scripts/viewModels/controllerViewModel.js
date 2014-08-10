@@ -4,8 +4,7 @@
 
 'use strict';
 
-//Rename DomainModel to DomainViewModel
-var DomainViewModel = IMVVM.createDomainViewModel({
+var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form => createCVMClass()
 
   getInitialState: function(){ //optional
     return {

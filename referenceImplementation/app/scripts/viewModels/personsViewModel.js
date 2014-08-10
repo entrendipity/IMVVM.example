@@ -29,7 +29,7 @@ var PersonsViewModel = (function(){
       this.selectPerson(params.id);
   };
 
-  var personsViewModel = IMVVM.createViewModel({
+  var PersonViewModelClass = IMVVM.createViewModelClass({  //short form => createVMClass()
 
     /* This is where you make ajax calls. You do not put ajax calls in getInitialState */
     dataContextWillInitialize: function(){
@@ -161,5 +161,5 @@ var PersonsViewModel = (function(){
     },
 
   });
-  return personsViewModel;
+  return PersonViewModelClass;
 })();

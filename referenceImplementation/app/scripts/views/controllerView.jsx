@@ -8,27 +8,29 @@
 
 'use strict';
 
-var ApplicationView = React.createClass({
+var ControllerView = React.createClass({
   mixins: [IMVVM.mixin.main, IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery],
 
   render: function(){
 
-    console.log('------------------------------------------ Current Application State ------------------------------------------')
-    console.log(this.state.domainDataContext);
-
     var display;
-    if(this.state.domainDataContext.pageNotFound){
+    var dataContext = this.state.dataContext;
+    
+    console.log('------------------------------------------ Current Application State ------------------------------------------')
+    console.log(dataContext);
+
+    if(dataContext.pageNotFound){
       display = <PageNotFound />;
     } else {
       display = (<div>
-        <NavBarView appContext={this.state.domainDataContext} />
+        <NavBarView appContext={dataContext} />
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <SideBarView appContext={this.state.domainDataContext} />
+              <SideBarView appContext={dataContext} />
             </div>
             <div className="col-md-8">
-              <DetailsView appContext={this.state.domainDataContext} />
+              <DetailsView appContext={dataContext} />
             </div>
           </div>
         </div>
