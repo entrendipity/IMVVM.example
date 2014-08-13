@@ -7,7 +7,6 @@
 /*jshint newcap:false */
 
 'use strict';
-
 var NavBarView = React.createClass({
 	toggleMenu: function(e){
 		$(this.refs.menu.getDOMNode()).slideToggle();

@@ -1,9 +1,9 @@
 /*jshint unused: vars */
 /*jshint unused: false */
 /* global IMVVM, HobbiesViewModel, PersonsViewModel */
-
 'use strict';
 
+var IMVVM = require('imvvm');
 var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form => createCVMClass()
 
   getInitialState: function(){ //optional
@@ -21,6 +21,24 @@ var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form =
         this.setState({mql:mql, media: id});
       } else {
         this.setState({mql:mql, media: id}, true);  
+      }
+    }
+  },
+
+  getViews: function(){
+    return {
+      "myView":{
+        component: DetailsView,
+        path: '/persons'
+      },
+      "myView2":{
+        component: HobbyListView,
+        path: function(){ return '/person/'+ this.persons.selectedPerson.id }
+      },
+      "myView3":{
+        viewDisplay: "Home",
+        component: HobbyListView,
+        path: '/home'
       }
     }
   },

@@ -3,6 +3,7 @@
 
 'use strict';
 
+var IMVVM = require('imvvm');
 var HobbyClass = IMVVM.createModelClass({ // short form => createMClass()
 
   id: {

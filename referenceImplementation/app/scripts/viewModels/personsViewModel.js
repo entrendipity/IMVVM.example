@@ -3,8 +3,7 @@
 
 'use strict';
 
-var PersonsViewModel = (function(){
-
+var PersonsViewModel = (function(IMVVM){
   var personStateChangeHandler = function(nextState/*, callback*/){
     var persons = {};
     persons.collection = this.collection.map(function(person){
@@ -42,21 +41,24 @@ var PersonsViewModel = (function(){
       this.setState(nextState, true);
     },
 
+    getViews: function(){
+      return {
+        "main":{
+          component: DetailsView,
+          path: function(){ return '/person/' + this.selectedPerson.id; }
+        }
+      }
+    },
+
     getRoutes: function(){
       return {
         displayPerson: {
           path: '/person/:id',
           handler: personRouteHandler,
-          //syncDelete: func
         },
         list: {
           path: '/people',
           handler: personRouteHandler,
-          //syncCreate: { handler : func, meta: {model: 'person'}}
-          //send meta with payload to server to be used
-          //can add anything to meta object
-          //meta data can be everything the server needs i.e. header, etc
-          //if sseMsgHandler exist then register listner for sse on client
         }
       };
     },
@@ -162,4 +164,4 @@ var PersonsViewModel = (function(){
 
   });
   return PersonViewModelClass;
-})();
+})(require('imvvm'));

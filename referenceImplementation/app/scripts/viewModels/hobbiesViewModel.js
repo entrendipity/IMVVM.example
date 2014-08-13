@@ -3,7 +3,7 @@
 
 'use strict';
 
-var HobbiesViewModel = (function(){
+var HobbiesViewModel = (function(IMVVM){
 
   var uuid = function () {
     /*jshint bitwise:false */
@@ -83,6 +83,16 @@ var HobbiesViewModel = (function(){
           alias: 'busy'
         }
       };
+    },
+
+    getViews: function(){
+      return {
+        "hob View":{
+          viewDisplay: "TestDisplay",
+          component: HobbyListView,
+          path: "selectHobby"
+        }
+      }
     },
 
     getRoutes: function(){
@@ -188,4 +198,4 @@ var HobbiesViewModel = (function(){
     }
   });
   return HobbiesViewModelClass;
-})();
+})(require('imvvm'));
