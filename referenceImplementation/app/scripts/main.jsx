@@ -10,7 +10,8 @@
 /* Kick of the App*/
 
 //enableUndo is optional - default is false
-//if getRoutes() is set in a ViewModel enableUndo defaults to true
+//enableRouting is optional - default is false
+//if enableRouting === true, enableUndo defaults to true and Undo is handled by pushState
 React.renderComponent(<ControllerView
-	controllerViewModel={ControllerViewModel} />,
+	controllerViewModel={ControllerViewModel} enableRouting={true} />,
 	document.getElementById('container'));

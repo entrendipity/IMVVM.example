@@ -4,9 +4,14 @@
 'use strict';
 
 var IMVVM = require('imvvm');
+
+//access pageJS and set the base path
+IMVVM.page.base('/basePath');
+
 var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form => createCVMClass()
 
   getInitialState: function(){ //optional
+    
     return {
       online: true,
       busy: false,
