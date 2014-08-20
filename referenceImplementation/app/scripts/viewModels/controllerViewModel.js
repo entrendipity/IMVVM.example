@@ -3,11 +3,9 @@
 /* global IMVVM, HobbiesViewModel, PersonsViewModel */
 'use strict';
 
-//access pageJS and set the base path
-IMVVM.page.base('/basePath');
-
 var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form => createCVMClass()
 
+  //imvvm-animate.js mixin
   mixins: [IMVVMAnimateMixin],
 
   getInitialState: function(){ //optional
@@ -15,8 +13,16 @@ var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form =
     return {
       online: true,
       busy: false,
+      basePath: IMVVM.page.base('/basePath'),
       path: '/people'
     };
+  },
+
+  basePath: {
+    kind: "pseudo",
+    get: function(){
+      return IMVVM.page.base();
+    }
   },
 
   /* Required if mediaQuery IMVVM.mixin.mediaQuery is used */
@@ -101,8 +107,8 @@ var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form =
   // },
 
   /* Four ways to set busy
-    1. set directly with a setter. This exposes a set method, which is also accessible from the View
-    2. set directly within a callback in a ViewModel. Needs setter to be present
+    1. set directly with a setter. This exposes the busy field to the View
+    2. set directly within a callback in a ViewModel. Need setter to be present
     3. 2nd arg in setState from ViewModel. Pass in {busy: true}
     4. From a trigger. Return state object i.e. {busy: true}, to domain model to process
   */

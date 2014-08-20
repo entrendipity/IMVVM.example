@@ -30,6 +30,7 @@ var NavBarView = React.createClass({
 		var onlineBtnTxt = this.props.appContext.online ? "Go offline" : "Go online";
 		var onlineBtnClass = this.props.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
 		var noOfPeople = this.props.appContext.personCount;
+		var basePath = this.props.appContext.basePath;
 		return (
 			<nav className="navbar navbar-default" role="navigation">
 			  <div className="container-fluid">
@@ -44,15 +45,15 @@ var NavBarView = React.createClass({
 			        <span className="icon-bar"></span>
 			        <span className="icon-bar"></span>
 			      </button>
-			      <a className="navbar-brand" href="/basePath/people">
+			      <a className="navbar-brand" href={basePath + "/people"}>
 			      	IMVVM Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
 			      </a>
 			    </div>
 
 			    <div ref="menu" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-              <li><a href="/basePath/broken/link">Bad Link</a></li>
-              <li><a href="/basePath/person/3">John Citizen</a></li>
+              <li><a href={basePath + "/broken/link"}>Bad Link</a></li>
+              <li><a href={basePath + "/person/3"}>John Citizen</a></li>
             </ul>
 			      <form className="navbar-form pull-right" role="search">
 			        <button onClick={this.undo}
