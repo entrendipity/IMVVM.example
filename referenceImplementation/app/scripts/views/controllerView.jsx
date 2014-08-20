@@ -13,7 +13,7 @@ var ControllerView = React.createClass({
   render: function(){
 
     var display;
-    var dataContext = this.state.dataContext;
+    var dataContext = this.state.appContext;
     
     console.log('------------------------------------------ Current Application State ------------------------------------------')
     console.log(dataContext);
