@@ -44,15 +44,15 @@ var NavBarView = React.createClass({
 			        <span className="icon-bar"></span>
 			        <span className="icon-bar"></span>
 			      </button>
-			      <a className="navbar-brand" href="/people">
+			      <a className="navbar-brand" href="/basePath/people">
 			      	IMVVM Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
 			      </a>
 			    </div>
 
 			    <div ref="menu" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-              <li><a href="/broken/link">Bad Link</a></li>
-              <li><a href="/person/3">John Citizen</a></li>
+              <li><a href="/basePath/broken/link">Bad Link</a></li>
+              <li><a href="/basePath/person/3">John Citizen</a></li>
             </ul>
 			      <form className="navbar-form pull-right" role="search">
 			        <button onClick={this.undo}

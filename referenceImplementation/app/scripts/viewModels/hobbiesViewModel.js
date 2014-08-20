@@ -3,7 +3,7 @@
 
 'use strict';
 
-var HobbiesViewModel = (function(IMVVM){
+var HobbiesViewModel = (function(){
 
   var uuid = function () {
     /*jshint bitwise:false */
@@ -59,7 +59,8 @@ var HobbiesViewModel = (function(IMVVM){
       ctx.revert();
       return;
     }
-    if(this.state.personsContext.selectedPerson.id != params.id){
+    if(this.state.personsContext.selectedPerson === void(0) && ('id' in params) ||
+      this.state.personsContext.selectedPerson.id != params.id){
       this.state.personsContext.selectPerson(params.id, function(){
         this.selectHobby(params.hobbyId);
       }.bind(this));
@@ -198,4 +199,4 @@ var HobbiesViewModel = (function(IMVVM){
     }
   });
   return HobbiesViewModelClass;
-})(require('imvvm'));
+})();

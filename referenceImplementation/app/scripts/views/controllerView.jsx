@@ -7,7 +7,6 @@
 /*jshint newcap:false */
 
 'use strict';
-var IMVVM = require('imvvm');
 var ControllerView = React.createClass({
   mixins: [IMVVM.mixin.main, IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery],
 

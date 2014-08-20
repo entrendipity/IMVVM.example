@@ -3,7 +3,7 @@
 
 'use strict';
 
-var PersonsViewModel = (function(IMVVM){
+var PersonsViewModel = (function(){
   var personStateChangeHandler = function(nextState/*, callback*/){
     var persons = {};
     persons.collection = this.collection.map(function(person){
@@ -164,4 +164,4 @@ var PersonsViewModel = (function(IMVVM){
 
   });
   return PersonViewModelClass;
-})(require('imvvm'));
+})();

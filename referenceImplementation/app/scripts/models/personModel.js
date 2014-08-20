@@ -5,7 +5,6 @@
 
 var PersonModel = (function(){
 
-  var IMVVM = require('imvvm');
   var Hobby = function(){
     return new HobbyClass().apply(this, arguments);
   };

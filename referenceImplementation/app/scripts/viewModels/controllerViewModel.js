@@ -3,12 +3,12 @@
 /* global IMVVM, HobbiesViewModel, PersonsViewModel */
 'use strict';
 
-var IMVVM = require('imvvm');
-
 //access pageJS and set the base path
 IMVVM.page.base('/basePath');
 
 var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form => createCVMClass()
+
+  mixins: [IMVVMAnimateMixin],
 
   getInitialState: function(){ //optional
     
