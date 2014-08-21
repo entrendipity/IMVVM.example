@@ -8,33 +8,34 @@
 
 'use strict';
 var NavBarView = React.createClass({
+  mixins: [IMVVM.mixin.view],
 	toggleMenu: function(e){
 		$(this.refs.menu.getDOMNode()).slideToggle();
 	},
 	undo: function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		this.props.appContext.revert();
+		this.state.appContext.revert();
 	},
 	redo: function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		this.props.appContext.advance();
+		this.state.appContext.advance();
 	},
 	toggleOnlineState: function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		this.props.appContext.online = !this.props.appContext.online;
+		this.state.appContext.online = !this.state.appContext.online;
 	},
 	render: function(){
-		var onlineBtnTxt = this.props.appContext.online ? "Go offline" : "Go online";
-		var onlineBtnClass = this.props.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
-		var noOfPeople = this.props.appContext.personCount;
-		var basePath = this.props.appContext.basePath;
+		var onlineBtnTxt = this.state.appContext.online ? "Go offline" : "Go online";
+		var onlineBtnClass = this.state.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
+		var noOfPeople = this.state.appContext.personCount;
+		var basePath = this.state.appContext.basePath;
 		return (
 			<nav className="navbar navbar-default" role="navigation">
 			  <div className="container-fluid">
-			    <h5 className="pull-right">Size: <b>{this.props.appContext.media}</b></h5>
+			    <h5 className="pull-right">Size: <b>{this.state.appContext.media}</b></h5>
 			    <div className="navbar-header">
 			      <button onClick={this.toggleMenu} type="button"
 			      className="navbar-toggle"
@@ -57,12 +58,12 @@ var NavBarView = React.createClass({
             </ul>
 			      <form className="navbar-form pull-right" role="search">
 			        <button onClick={this.undo}
-								disabled={!this.props.appContext.canRevert}
+								disabled={!this.state.appContext.canRevert}
 								className="btn btn-default btn-sm">
 			        Undo
 			        </button>
 			         <button onClick={this.redo}
-								disabled={!this.props.appContext.canAdvance}
+								disabled={!this.state.appContext.canAdvance}
 								className="btn btn-default btn-sm">
 			        Redo
 			        </button>
