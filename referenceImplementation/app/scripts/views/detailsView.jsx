@@ -11,14 +11,19 @@
 var DetailsView = React.createClass({
 	mixins: [IMVVM.mixin.view],
 	render: function() {
+		console.log('Details View Notified');
+		var display;
 		if(!this.state.appContext.persons.selectedPerson){
-			return <div>Select or add a person</div>;
+			display = <div>Select or add a person</div>;
+		} else {
+			display = (
+				<div>
+					<FormView selectedPerson={this.state.appContext.persons.selectedPerson}/>
+					<HobbyListView appContext={this.state.appContext}/>
+				</div>
+			);
 		}
-		return (
-			<div>
-				<FormView selectedPerson={this.state.appContext.persons.selectedPerson}/>
-				<HobbyListView appContext={this.state.appContext}/>
-			</div>
-		);
+		 
+		return <div>{display}</div>;
 	}
 });

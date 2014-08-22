@@ -5,6 +5,10 @@
 /*jshint white:false */
 /*jshint trailing:false */
 /*jshint newcap:false */
+/*
+/*  IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery
+/*  These should only be mixed-in in the ControllerView
+*/
 
 'use strict';
 var ControllerView = React.createClass({
@@ -25,10 +29,10 @@ var ControllerView = React.createClass({
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <SideBarView />
+              <SideBarView viewId={"SideBarView"}/>
             </div>
             <div className="col-md-8">
-              <DetailsView />
+              <DetailsView viewId={"DetailsView"} />
             </div>
           </div>
         </div>

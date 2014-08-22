@@ -13,12 +13,8 @@ var SideBarView = React.createClass({
   addPerson: function(value){
 		this.state.appContext.persons.addPerson(value);
 	},
-	shouldComponentUpdate: function(nextProps, nextState){
-		var current = this.state.appContext.state.dataContextWillUpdate;
-		var next = nextState.appContext.state.dataContextWillUpdate;
-		return "persons" in next || "persons" in current || "hobbies" in next;
-	},
 	render: function(){
+		console.log('SideBar View Notified');
 		return (
 			<div>
 				<AddControl placeholder="Full Name" funcAdd={this.addPerson} />

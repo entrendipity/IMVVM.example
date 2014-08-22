@@ -31,7 +31,7 @@ var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form =
       if(this.canRevert){
         this.setState({mql:mql, media: id});
       } else {
-        this.setState({mql:mql, media: id}, true);  
+        this.setState({mql:mql, media: id}, false);  
       }
     }
   },
