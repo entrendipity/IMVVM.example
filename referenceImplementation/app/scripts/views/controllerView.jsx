@@ -29,10 +29,10 @@ var ControllerView = React.createClass({
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <SideBarView viewId={"SideBarView"}/>
+              <SideBarView viewKey={"SideBarView"}/>
             </div>
             <div className="col-md-8">
-              <DetailsView viewId={"DetailsView"} />
+              <DetailsView viewKey={"DetailsView"} />
             </div>
           </div>
         </div>
