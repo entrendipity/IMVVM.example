@@ -1,4 +1,4 @@
-# IMVVM TodoMVC Example
+# Astarisx TodoMVC Example
 
 ## Directory structure.
 Views here are referred to as "components" as they are React components.
@@ -47,4 +47,4 @@ This TodoMVC application is based on the [work done by](https://github.com/faceb
 
 
 ## License
-IMVVM is MIT-licensed.
+Astarisx is MIT-licensed.
