@@ -19,7 +19,7 @@ Astarisx Documentation can be found [here.](https://github.com/entrendipity/asta
 * cd ..
 * run `grunt serve`
 
-_n.b. The application uses client-side pushState routing and does not reference a server. If you lose the application, navigate to localhost:9000 and not localhost:9000/people to reinitialize the application. This is not how it would work when using a remote server._
+_n.b. The application uses client-side pushState routing and does not reference a server. If you lose the application, navigate to localhost:9000 and not localhost:9000/basePath/people to reinitialize the application. This is not how it would work when using a remote server._
 
 ## Author
 Frank Panetta  - [Follow @fattenap](https://twitter.com/intent/follow?screen_name=fattenap)
