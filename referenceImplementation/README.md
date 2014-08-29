@@ -1,9 +1,9 @@
 Astarisx Reference Implementation
 =====
 
-[Astarisx](https://github.com/entrendipity/astarisx) helps implement the Model-View-ViewModel pattern in [React](http://facebook.github.io/react/) applications. It's role is to provide the framework to create Models and ViewModels, with React acting as the View. It is designed to complement React. The Astarisx API gets its inspiration from the React library. So it feels like React. This makes it easy to understand and enables you to be productive in a short time frame.
+Astarisx is a Highly Composable Application Architecture for building modern client-side web applications with [React](http://facebook.github.io/react/). 
 
-This example application is a reference implementation to be read with the [Developer's Guide](https://github.com/entrendipity/astarisx/wiki/Developer's-Guide). It is a little contrived and not necessarily the way you would strucuture your application, but it uses all of the API to demonstrate how each function is used. 
+This example application is a reference implementation to be read with the [Developer's Guide](https://github.com/entrendipity/astarisx/wiki/Developer's-Guide). It is a little contrived and not necessarily the way you would strucuture your application, but it uses most of the API to demonstrate how each function is used. 
 
 Astarisx Documentation can be found [here.](https://github.com/entrendipity/astarisx/wiki)  
 #### Screen shot
