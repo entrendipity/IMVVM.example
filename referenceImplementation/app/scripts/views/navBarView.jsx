@@ -28,7 +28,7 @@ var NavBarView = React.createClass({
 		this.state.appContext.online = !this.state.appContext.online;
 	},
 	render: function(){
-		console.log('NavBar View Notified');
+		console.log('NavBar View rendered');
 		var onlineBtnTxt = this.state.appContext.online ? "Go offline" : "Go online";
 		var onlineBtnClass = this.state.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
 		var noOfPeople = this.state.appContext.personCount;

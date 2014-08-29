@@ -29,9 +29,9 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   mediaChangeHandler: function(id, mql, initializing){
     if(mql.matches){
       if(this.canRevert){
-        this.setState({mql:mql, media: id});
+        this.setState({mql:mql, media: id, notify:'NavBarView'});
       } else {
-        this.setState({mql:mql, media: id}, false);  
+        this.setState({mql:mql, media: id, notify:'NavBarView'}, false);  
       }
     }
   },
@@ -124,7 +124,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
       return this.state.online;
     },
     set: function(newValue){
-      this.setState({'online': newValue });
+      this.setState({'online': newValue, notify:"NavBarView" });
     }
   },
 

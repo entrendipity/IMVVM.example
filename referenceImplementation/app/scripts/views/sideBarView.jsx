@@ -14,7 +14,7 @@ var SideBarView = React.createClass({
 		this.state.appContext.persons.addPerson(value);
 	},
 	render: function(){
-		console.log('SideBar View Notified');
+		console.log('SideBar View rendered');
 		return (
 			<div>
 				<AddControl placeholder="Full Name" funcAdd={this.addPerson} />

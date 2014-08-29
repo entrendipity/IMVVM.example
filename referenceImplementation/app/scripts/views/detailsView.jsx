@@ -11,7 +11,7 @@
 var DetailsView = React.createClass({
 	mixins: [Astarisx.mixin.view],
 	render: function() {
-		console.log('Details View Notified');
+		console.log('Details View rendered');
 		var display;
 		if(!this.state.appContext.persons.selectedPerson){
 			display = <div>Select or add a person</div>;

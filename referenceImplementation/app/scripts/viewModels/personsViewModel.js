@@ -16,7 +16,7 @@ var PersonsViewModel = (function(){
     /* 
       to notify controllerView us "*" which is the predefined viewId
     */
-  this.setState(persons, {notify: ["SideBarView", "DetailsView"]});
+    this.setState(persons, {notify: ["SideBarView", "DetailsView"]});
   };
 
   var Person = function(){
@@ -41,7 +41,7 @@ var PersonsViewModel = (function(){
         return new Person(person, true);
       }.bind(this));
 
-      this.setState(nextState, true);
+      this.setState(nextState, {notify: "SideBarView"}, false);
     },
 
     getViews: function(){
@@ -143,28 +143,31 @@ var PersonsViewModel = (function(){
 
     deletePerson: function(uid){
       var nextState = {};
+
       nextState.collection = this.collection.filter(function(person){
         return person.id !== uid;
-      });
-      nextState.selectedPerson = void(0);
+      }.bind(this));
+
       if(nextState.collection.length > 0){
-        if (!!this.selectedPerson && this.selectedPerson.id === uid){
-          nextState.selectedPerson = void(0);
-          this.setState(nextState, { enableUndo: true,
-            path: '/people'});
-        } else {
-          if(this.selectedPerson){
-            nextState.selectedPerson = new Person(this.selectedPerson);
-            this.setState(nextState,
-              {path: '/person/' + nextState.selectedPerson.id});
-          } else {
-            this.setState(nextState,
-              {path: '/people'});
+        if (!!this.selectedPerson){
+          if(this.selectedPerson.id === uid){
+            nextState.selectedPerson = void(0);
+            this.setState(nextState, { enableUndo: true,
+              path: '/people'});
+              return;
           }
         }
+      } else {
+        if(!!this.selectedPerson){
+          nextState.selectedPerson = void(0);
+        }        
+        this.setState(nextState, {path: '/people'});
+        return;
       }
+      this.setState(nextState);
     },
 
   });
+
   return PersonViewModelClass;
 })();

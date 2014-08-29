@@ -25,7 +25,7 @@ var DemoApp = React.createClass({
       display = <PageNotFound />;
     } else {
       display = (<div>
-        <NavBarView />
+        <NavBarView viewKey={"NavBarView"} />
         <div className="container">
           <div className="row">
             <div className="col-md-4">

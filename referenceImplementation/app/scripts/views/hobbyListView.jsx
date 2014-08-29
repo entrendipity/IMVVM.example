@@ -16,16 +16,10 @@ var HobbyListView = React.createClass({
     this.props.appContext.hobbies.current.name = e.target.value;
   },
 	shouldComponentUpdate: function(nextProps, nextState){
-		if("hobbies" in nextProps.appContext.state.dataContextWillUpdate){
-			return true;
-		}
-		if("persons" in nextProps.appContext.state.dataContextWillUpdate){
-			var nextPerson = nextProps.appContext.state.dataContextWillUpdate.persons.selectedPerson;
-			var selectedPerson = this.props.appContext.persons.selectedPerson;
-			return nextPerson.id != selectedPerson.id || 
-				nextPerson.hobbies.length !== selectedPerson.hobbies.length;
-		}
-		return false;
+
+		//use reference equality to test if an instance has changed
+		return	this.props.appContext.hobbies.current !== nextProps.appContext.hobbies.current ||
+						this.props.appContext.persons.selectedPerson !== nextProps.appContext.persons.selectedPerson;
 	},
 	render: function() {
 		var app = this.props.appContext;
