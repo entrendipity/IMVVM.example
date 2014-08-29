@@ -1,5 +1,5 @@
 /*jshint unused: false */
-/* global IMVVM, HobbyModel, DataService */
+/* global Astarisx, HobbyModel, DataService */
 
 'use strict';
 
@@ -70,7 +70,7 @@ var HobbiesViewModel = (function(){
 
   };
 
-  var HobbiesViewModelClass = IMVVM.createViewModelClass({  //short form => createVMClass()
+  var HobbiesViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
     getWatchedState: function() {
       return {
@@ -176,7 +176,7 @@ var HobbiesViewModel = (function(){
 
               this.state.personsContext.selectedPerson.deleteHobby(value);
 
-        then IMVVM is notified that the call was made from the 'persons' context
+        then Astarisx is notified that the call was made from the 'persons' context
         and not from the 'hobbies' context. Therefore any subscribers to 'hobbies.current'
         are unaware of changes to 'hobbies.current'.
 

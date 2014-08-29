@@ -6,13 +6,13 @@
 /*jshint trailing:false */
 /*jshint newcap:false */
 /*
-/*  IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery
-/*  These should only be mixed-in in the ControllerView
+/*  Astarisx.mixin.pushState, Astarisx.mixin.mediaQuery
+/*  These should only be mixed-in in the DemoApp
 */
 
 'use strict';
-var ControllerView = React.createClass({
-  mixins: [IMVVM.mixin.controllerView, IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery],
+var DemoApp = React.createClass({
+  mixins: [Astarisx.mixin.ui, Astarisx.mixin.pushState, Astarisx.mixin.mediaQuery],
 
   render: function(){
 

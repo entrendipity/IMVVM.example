@@ -1,5 +1,5 @@
 /*jshint unused: false */
-/* global IMVVM, DataService, HobbyClass */
+/* global Astarisx, DataService, HobbyClass */
 
 'use strict';
 
@@ -32,7 +32,7 @@ var PersonModel = (function(){
     return isNaN(age) ? 'Enter your Birthday' : age + ' years old';
   };
 
-  var PersonClass = IMVVM.createModelClass({
+  var PersonClass = Astarisx.createModelClass({
 
     getInitialState: function(){
 

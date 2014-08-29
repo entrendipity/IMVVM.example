@@ -8,7 +8,7 @@
 
 'use strict';
 var NavBarView = React.createClass({
-  mixins: [IMVVM.mixin.view],
+  mixins: [Astarisx.mixin.view],
 	toggleMenu: function(e){
 		$(this.refs.menu.getDOMNode()).slideToggle();
 	},
@@ -48,7 +48,7 @@ var NavBarView = React.createClass({
 			        <span className="icon-bar"></span>
 			      </button>
 			      <a className="navbar-brand" href={basePath + "/people"}>
-			      	IMVVM Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
+			      	Astarisx Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
 			      </a>
 			    </div>
 

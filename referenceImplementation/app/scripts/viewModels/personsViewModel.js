@@ -1,5 +1,5 @@
 /*jshint unused: false */
-/* global IMVVM, DataService, PersonModel */
+/* global Astarisx, DataService, PersonModel */
 
 'use strict';
 
@@ -31,7 +31,7 @@ var PersonsViewModel = (function(){
       this.selectPerson(params.id);
   };
 
-  var PersonViewModelClass = IMVVM.createViewModelClass({  //short form => createVMClass()
+  var PersonViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
     /* This is where you make ajax calls. You do not put ajax calls in getInitialState */
     dataContextWillInitialize: function(){

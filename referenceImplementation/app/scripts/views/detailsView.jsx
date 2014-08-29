@@ -9,7 +9,7 @@
 'use strict';
 
 var DetailsView = React.createClass({
-	mixins: [IMVVM.mixin.view],
+	mixins: [Astarisx.mixin.view],
 	render: function() {
 		console.log('Details View Notified');
 		var display;

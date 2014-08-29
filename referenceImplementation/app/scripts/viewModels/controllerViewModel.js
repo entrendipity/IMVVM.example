@@ -1,19 +1,19 @@
 /*jshint unused: vars */
 /*jshint unused: false */
-/* global IMVVM, HobbiesViewModel, PersonsViewModel */
+/* global Astarisx, HobbiesViewModel, PersonsViewModel */
 'use strict';
 
-var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form => createCVMClass()
+var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short form => createCVMClass()
 
   //imvvm-animate.js mixin
-  mixins: [IMVVMAnimateMixin],
+  mixins: [AstarisxAnimate],
 
   getInitialState: function(){ //optional
     
     return {
       online: true,
       busy: false,
-      basePath: IMVVM.page.base('/basePath'),
+      basePath: Astarisx.page.base('/basePath'),
       path: '/people'
     };
   },
@@ -21,11 +21,11 @@ var ControllerViewModel = IMVVM.createControllerViewModelClass({ // short form =
   basePath: {
     kind: "pseudo",
     get: function(){
-      return IMVVM.page.base();
+      return Astarisx.page.base();
     }
   },
 
-  /* Required if mediaQuery IMVVM.mixin.mediaQuery is used */
+  /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
   mediaChangeHandler: function(id, mql, initializing){
     if(mql.matches){
       if(this.canRevert){

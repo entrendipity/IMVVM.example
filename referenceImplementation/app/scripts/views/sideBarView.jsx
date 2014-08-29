@@ -9,7 +9,7 @@
 'use strict';
 
 var SideBarView = React.createClass({
-	mixins: [IMVVM.mixin.view],
+	mixins: [Astarisx.mixin.view],
   addPerson: function(value){
 		this.state.appContext.persons.addPerson(value);
 	},
