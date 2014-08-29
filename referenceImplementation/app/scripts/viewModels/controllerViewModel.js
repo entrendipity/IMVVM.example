@@ -6,7 +6,7 @@
 var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short form => createCVMClass()
 
   //imvvm-animate.js mixin
-  mixins: [AstarisxAnimate],
+  mixins: [AstarisxAnimate.mixin],
 
   getInitialState: function(){ //optional
     
@@ -36,7 +36,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
     }
   },
 
-  getViews: function(){
+  getDisplayss: function(){
     return {
       "myView":{
         component: DetailsView,

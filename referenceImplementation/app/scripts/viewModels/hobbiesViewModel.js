@@ -85,7 +85,7 @@ var HobbiesViewModel = (function(){
       };
     },
 
-    getViews: function(){
+    getDisplays: function(){
       return {
         "hob View":{
           viewDisplay: "TestDisplay",

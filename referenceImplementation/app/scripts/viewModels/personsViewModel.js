@@ -44,7 +44,7 @@ var PersonsViewModel = (function(){
       this.setState(nextState, {notify: "SideBarView"}, false);
     },
 
-    getViews: function(){
+    getDisplays: function(){
       return {
         "main":{
           component: DetailsView,
