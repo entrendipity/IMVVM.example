@@ -7,34 +7,36 @@
 /*jshint newcap:false */
 
 'use strict';
-
 var NavBarView = React.createClass({
+  mixins: [Astarisx.mixin.view],
 	toggleMenu: function(e){
 		$(this.refs.menu.getDOMNode()).slideToggle();
 	},
 	undo: function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		this.props.appContext.revert();
+		this.state.appContext.revert();
 	},
 	redo: function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		this.props.appContext.advance();
+		this.state.appContext.advance();
 	},
 	toggleOnlineState: function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		this.props.appContext.online = !this.props.appContext.online;
+		this.state.appContext.online = !this.state.appContext.online;
 	},
 	render: function(){
-		var onlineBtnTxt = this.props.appContext.online ? "Go offline" : "Go online";
-		var onlineBtnClass = this.props.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
-		var noOfPeople = this.props.appContext.personCount;
+		console.log('NavBar View rendered');
+		var onlineBtnTxt = this.state.appContext.online ? "Go offline" : "Go online";
+		var onlineBtnClass = this.state.appContext.online ? "btn btn-success btn-sm": "btn btn-danger btn-sm";
+		var noOfPeople = this.state.appContext.personCount;
+		var basePath = this.state.appContext.basePath;
 		return (
 			<nav className="navbar navbar-default" role="navigation">
 			  <div className="container-fluid">
-			    <h5 className="pull-right">Size: <b>{this.props.appContext.media}</b></h5>
+			    <h5 className="pull-right">Size: <b>{this.state.appContext.media}</b></h5>
 			    <div className="navbar-header">
 			      <button onClick={this.toggleMenu} type="button"
 			      className="navbar-toggle"
@@ -45,24 +47,24 @@ var NavBarView = React.createClass({
 			        <span className="icon-bar"></span>
 			        <span className="icon-bar"></span>
 			      </button>
-			      <a className="navbar-brand" href="/people">
-			      	IMVVM Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
+			      <a className="navbar-brand" href={basePath + "/people"}>
+			      	Astarisx Demo: {noOfPeople} {noOfPeople === 1 ? "person" : "people"}
 			      </a>
 			    </div>
 
 			    <div ref="menu" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-              <li><a href="/broken/link">Bad Link</a></li>
-              <li><a href="/person/3">John Citizen</a></li>
+              <li><a href={basePath + "/broken/link"}>Bad Link</a></li>
+              <li><a href={basePath + "/person/3"}>John Citizen</a></li>
             </ul>
 			      <form className="navbar-form pull-right" role="search">
 			        <button onClick={this.undo}
-								disabled={!this.props.appContext.canRevert}
+								disabled={!this.state.appContext.canRevert}
 								className="btn btn-default btn-sm">
 			        Undo
 			        </button>
 			         <button onClick={this.redo}
-								disabled={!this.props.appContext.canAdvance}
+								disabled={!this.state.appContext.canAdvance}
 								className="btn btn-default btn-sm">
 			        Redo
 			        </button>

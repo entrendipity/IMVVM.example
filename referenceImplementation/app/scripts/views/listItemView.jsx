@@ -14,19 +14,19 @@ var ListItemView = React.createClass({
     
     var uid = this.props.person.id;
 
-    if(this.props.appContext.persons.selectedPerson &&
-      this.props.appContext.persons.selectedPerson.id != uid){
-      this.props.appContext.persons.selectPerson(uid);
+    if(this.props.personsCxt.selectedPerson &&
+      this.props.personsCxt.selectedPerson.id != uid){
+      this.props.personsCxt.selectPerson(uid);
     } else {
-      this.props.appContext.persons.selectPerson(uid);
+      this.props.personsCxt.selectPerson(uid);
     }
   },
 
   deletePerson: function(e){
-    this.props.appContext.persons.deletePerson(this.props.person.id);
+    this.props.personsCxt.deletePerson(this.props.person.id);
   },
   render: function() {
-    var selectedHobby = this.props.selected && !!this.props.appContext.persons.selectedHobby ? " is " + this.props.appContext.persons.selectedHobby : "";
+    var selectedHobby = this.props.selected && !!this.props.personsCxt.selectedHobby ? " is " + this.props.personsCxt.selectedHobby : "";
     var person = this.props.person;
     return (
       <a
@@ -34,7 +34,7 @@ var ListItemView = React.createClass({
         key={person.id}
         href="#"
         className={this.props.selected ? "list-group-item active" : "list-group-item"} >
-            {this.props.appContext.persons.imOnline ? "" : "Offline -> "} {person.fullName + selectedHobby}
+            {this.props.personsCxt.imOnline ? "" : "Offline -> "} {person.fullName + selectedHobby}
             <DeleteButton funcDelete={this.deletePerson} />
         </a>
     );

@@ -1,9 +1,9 @@
-/*jshint unused: false */
-/* global IMVVM */
+/* jshint unused: false */
+/* global Astarisx */
 
 'use strict';
 
-var HobbyModel = IMVVM.createModel({
+var HobbyClass = Astarisx.createModelClass({ // short form => createMClass()
 
   id: {
     kind: 'uid',

@@ -1,27 +1,55 @@
 /*jshint unused: vars */
 /*jshint unused: false */
-/* global IMVVM, HobbiesViewModel, PersonsViewModel */
-
+/* global Astarisx, HobbiesViewModel, PersonsViewModel */
 'use strict';
 
-//Rename DomainModel to DomainViewModel
-var DomainViewModel = IMVVM.createDomainViewModel({
+var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short form => createCVMClass()
+
+  //imvvm-animate.js mixin
+  mixins: [AstarisxAnimate],
 
   getInitialState: function(){ //optional
+    
     return {
       online: true,
       busy: false,
+      basePath: Astarisx.page.base('/basePath'),
       path: '/people'
     };
   },
 
-  /* Required if mediaQuery IMVVM.mixin.mediaQuery is used */
+  basePath: {
+    kind: "pseudo",
+    get: function(){
+      return Astarisx.page.base();
+    }
+  },
+
+  /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
   mediaChangeHandler: function(id, mql, initializing){
     if(mql.matches){
       if(this.canRevert){
-        this.setState({mql:mql, media: id});
+        this.setState({mql:mql, media: id, notify:'NavBarView'});
       } else {
-        this.setState({mql:mql, media: id}, true);  
+        this.setState({mql:mql, media: id, notify:'NavBarView'}, false);  
+      }
+    }
+  },
+
+  getDisplayss: function(){
+    return {
+      "myView":{
+        component: DetailsView,
+        path: '/persons'
+      },
+      "myView2":{
+        component: HobbyListView,
+        path: function(){ return '/person/'+ this.persons.selectedPerson.id }
+      },
+      "myView3":{
+        viewDisplay: "Home",
+        component: HobbyListView,
+        path: '/home'
       }
     }
   },
@@ -79,8 +107,8 @@ var DomainViewModel = IMVVM.createDomainViewModel({
   // },
 
   /* Four ways to set busy
-    1. set directly with a setter. This exposes a set method, which is also accessible from the View
-    2. set directly within a callback in a ViewModel. Needs setter to be present
+    1. set directly with a setter. This exposes the busy field to the View
+    2. set directly within a callback in a ViewModel. Need setter to be present
     3. 2nd arg in setState from ViewModel. Pass in {busy: true}
     4. From a trigger. Return state object i.e. {busy: true}, to domain model to process
   */
@@ -96,7 +124,7 @@ var DomainViewModel = IMVVM.createDomainViewModel({
       return this.state.online;
     },
     set: function(newValue){
-      this.setState({'online': newValue });
+      this.setState({'online': newValue, notify:"NavBarView" });
     }
   },
 

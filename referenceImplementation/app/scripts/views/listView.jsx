@@ -10,15 +10,13 @@
 
 var ListView = React.createClass({
 	
-
 	render: function() {
-		var app = this.props.appContext;
-		var collection = this.props.appContext.persons.collection;
-		var current = this.props.appContext.persons.selectedPerson;
-		var appContext = this.props.appContext;
+		var personsCxt = this.props.personsCxt;
+		var collection = personsCxt.collection;
+		var current = personsCxt.selectedPerson;
 		var list = collection.map(function(person){
 			return (
-				<ListItemView appContext={appContext} 
+				<ListItemView key={person.id} personsCxt={personsCxt} 
 					person={person} selected={!!current && current.id === person.id} />
 			);
 		});

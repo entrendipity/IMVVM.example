@@ -9,15 +9,21 @@
 'use strict';
 
 var DetailsView = React.createClass({
+	mixins: [Astarisx.mixin.view],
 	render: function() {
-		if(!this.props.appContext.persons.selectedPerson){
-			return <div>Select or add a person</div>;
+		console.log('Details View rendered');
+		var display;
+		if(!this.state.appContext.persons.selectedPerson){
+			display = <div>Select or add a person</div>;
+		} else {
+			display = (
+				<div>
+					<FormView selectedPerson={this.state.appContext.persons.selectedPerson}/>
+					<HobbyListView appContext={this.state.appContext}/>
+				</div>
+			);
 		}
-		return (
-			<div>
-				<FormView appContext={this.props.appContext}/>
-				<HobbyListView appContext={this.props.appContext}/>
-			</div>
-		);
+		 
+		return <div>{display}</div>;
 	}
 });

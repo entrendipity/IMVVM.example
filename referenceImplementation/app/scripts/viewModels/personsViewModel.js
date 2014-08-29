@@ -1,10 +1,9 @@
 /*jshint unused: false */
-/* global IMVVM, DataService, PersonModel */
+/* global Astarisx, DataService, PersonModel */
 
 'use strict';
 
 var PersonsViewModel = (function(){
-
   var personStateChangeHandler = function(nextState/*, callback*/){
     var persons = {};
     persons.collection = this.collection.map(function(person){
@@ -14,7 +13,10 @@ var PersonsViewModel = (function(){
       }
       return person;
     });
-  this.setState(persons);
+    /* 
+      to notify controllerView us "*" which is the predefined viewId
+    */
+    this.setState(persons, {notify: ["SideBarView", "DetailsView"]});
   };
 
   var Person = function(){
@@ -29,7 +31,7 @@ var PersonsViewModel = (function(){
       this.selectPerson(params.id);
   };
 
-  var personsViewModel = IMVVM.createViewModel({
+  var PersonViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
     /* This is where you make ajax calls. You do not put ajax calls in getInitialState */
     dataContextWillInitialize: function(){
@@ -39,7 +41,16 @@ var PersonsViewModel = (function(){
         return new Person(person, true);
       }.bind(this));
 
-      this.setState(nextState, true);
+      this.setState(nextState, {notify: "SideBarView"}, false);
+    },
+
+    getDisplays: function(){
+      return {
+        "main":{
+          component: DetailsView,
+          path: function(){ return '/person/' + this.selectedPerson.id; }
+        }
+      }
     },
 
     getRoutes: function(){
@@ -47,16 +58,10 @@ var PersonsViewModel = (function(){
         displayPerson: {
           path: '/person/:id',
           handler: personRouteHandler,
-          //syncDelete: func
         },
         list: {
           path: '/people',
           handler: personRouteHandler,
-          //syncCreate: { handler : func, meta: {model: 'person'}}
-          //send meta with payload to server to be used
-          //can add anything to meta object
-          //meta data can be everything the server needs i.e. header, etc
-          //if sseMsgHandler exist then register listner for sse on client
         }
       };
     },
@@ -138,28 +143,31 @@ var PersonsViewModel = (function(){
 
     deletePerson: function(uid){
       var nextState = {};
+
       nextState.collection = this.collection.filter(function(person){
         return person.id !== uid;
-      });
-      nextState.selectedPerson = void(0);
+      }.bind(this));
+
       if(nextState.collection.length > 0){
-        if (!!this.selectedPerson && this.selectedPerson.id === uid){
-          nextState.selectedPerson = void(0);
-          this.setState(nextState, { enableUndo: true,
-            path: '/people'});
-        } else {
-          if(this.selectedPerson){
-            nextState.selectedPerson = new Person(this.selectedPerson);
-            this.setState(nextState,
-              {path: '/person/' + nextState.selectedPerson.id});
-          } else {
-            this.setState(nextState,
-              {path: '/people'});
+        if (!!this.selectedPerson){
+          if(this.selectedPerson.id === uid){
+            nextState.selectedPerson = void(0);
+            this.setState(nextState, { enableUndo: true,
+              path: '/people'});
+              return;
           }
         }
+      } else {
+        if(!!this.selectedPerson){
+          nextState.selectedPerson = void(0);
+        }        
+        this.setState(nextState, {path: '/people'});
+        return;
       }
+      this.setState(nextState);
     },
 
   });
-  return personsViewModel;
+
+  return PersonViewModelClass;
 })();

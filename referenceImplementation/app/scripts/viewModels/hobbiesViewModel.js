@@ -1,5 +1,5 @@
 /*jshint unused: false */
-/* global IMVVM, HobbyModel, DataService */
+/* global Astarisx, HobbyModel, DataService */
 
 'use strict';
 
@@ -43,7 +43,6 @@ var HobbiesViewModel = (function(){
   //Use this if state change is triggered by others action
   var onPersonChangeHandler = function(nextState, prevState, field, context,
       nextPath, prevPath){
-
     if(this.current !== void(0) && context === 'persons' &&
       (nextState === void(0) || nextState.id !== prevState.id || nextPath !== prevPath)){
       return { hobbies: { current: void(0) }, busy: false };
@@ -51,7 +50,7 @@ var HobbiesViewModel = (function(){
   };
 
   var Hobby = function(){
-    return new HobbyModel(hobbyStateChangeHandler).apply(this, arguments);
+    return new HobbyClass(hobbyStateChangeHandler).apply(this, arguments);
   };
 
   var hobbyRouteHandler = function(params, path, pathId, ctx){
@@ -59,7 +58,8 @@ var HobbiesViewModel = (function(){
       ctx.revert();
       return;
     }
-    if(this.state.personsContext.selectedPerson.id != params.id){
+    if(this.state.personsContext.selectedPerson === void(0) && ('id' in params) ||
+      this.state.personsContext.selectedPerson.id != params.id){
       this.state.personsContext.selectPerson(params.id, function(){
         this.selectHobby(params.hobbyId);
       }.bind(this));
@@ -69,7 +69,7 @@ var HobbiesViewModel = (function(){
 
   };
 
-  var hobbiesViewModel = IMVVM.createViewModel({
+  var HobbiesViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
     getWatchedState: function() {
       return {
@@ -83,6 +83,16 @@ var HobbiesViewModel = (function(){
           alias: 'busy'
         }
       };
+    },
+
+    getDisplays: function(){
+      return {
+        "hob View":{
+          viewDisplay: "TestDisplay",
+          component: HobbyListView,
+          path: "selectHobby"
+        }
+      }
     },
 
     getRoutes: function(){
@@ -165,7 +175,7 @@ var HobbiesViewModel = (function(){
 
               this.state.personsContext.selectedPerson.deleteHobby(value);
 
-        then IMVVM is notified that the call was made from the 'persons' context
+        then Astarisx is notified that the call was made from the 'persons' context
         and not from the 'hobbies' context. Therefore any subscribers to 'hobbies.current'
         are unaware of changes to 'hobbies.current'.
 
@@ -187,5 +197,5 @@ var HobbiesViewModel = (function(){
       }
     }
   });
-  return hobbiesViewModel;
+  return HobbiesViewModelClass;
 })();

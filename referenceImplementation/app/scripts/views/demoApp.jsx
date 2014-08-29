@@ -5,30 +5,34 @@
 /*jshint white:false */
 /*jshint trailing:false */
 /*jshint newcap:false */
+/*
+/*  Astarisx.mixin.pushState, Astarisx.mixin.mediaQuery
+/*  These should only be mixed-in in the DemoApp
+*/
 
 'use strict';
-
-var ApplicationView = React.createClass({
-  mixins: [IMVVM.mixin.main, IMVVM.mixin.pushState, IMVVM.mixin.mediaQuery],
+var DemoApp = React.createClass({
+  mixins: [Astarisx.mixin.ui, Astarisx.mixin.pushState, Astarisx.mixin.mediaQuery],
 
   render: function(){
 
-    console.log('------------------------------------------ Current Application State ------------------------------------------')
-    console.log(this.state.domainDataContext);
-
     var display;
-    if(this.state.domainDataContext.pageNotFound){
+    
+    console.log('------------------------------------------ Current Application State ------------------------------------------')
+    console.log(this.state.appContext);
+
+    if(this.state.appContext.pageNotFound){
       display = <PageNotFound />;
     } else {
       display = (<div>
-        <NavBarView appContext={this.state.domainDataContext} />
+        <NavBarView viewKey={"NavBarView"} />
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <SideBarView appContext={this.state.domainDataContext} />
+              <SideBarView viewKey={"SideBarView"}/>
             </div>
             <div className="col-md-8">
-              <DetailsView appContext={this.state.domainDataContext} />
+              <DetailsView viewKey={"DetailsView"} />
             </div>
           </div>
         </div>
