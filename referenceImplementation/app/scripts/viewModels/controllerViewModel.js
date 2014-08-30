@@ -124,7 +124,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
       return this.state.online;
     },
     set: function(newValue){
-      this.setState({'online': newValue, notify:"NavBarView" });
+      this.setState({'online': newValue });
     }
   },
 

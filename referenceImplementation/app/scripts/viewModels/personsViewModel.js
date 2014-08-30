@@ -16,7 +16,7 @@ var PersonsViewModel = (function(){
     /* 
       to notify controllerView us "*" which is the predefined viewId
     */
-    this.setState(persons, {notify: ["SideBarView", "DetailsView"]});
+    this.setState(persons);
   };
 
   var Person = function(){
