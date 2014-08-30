@@ -36,23 +36,23 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
     }
   },
 
-  getDisplayss: function(){
-    return {
-      "myView":{
-        component: DetailsView,
-        path: '/persons'
-      },
-      "myView2":{
-        component: HobbyListView,
-        path: function(){ return '/person/'+ this.persons.selectedPerson.id }
-      },
-      "myView3":{
-        viewDisplay: "Home",
-        component: HobbyListView,
-        path: '/home'
-      }
-    }
-  },
+  // getDisplays: function(){
+  //   return {
+  //     "myView":{
+  //       component: DetailsView,
+  //       path: '/persons'
+  //     },
+  //     "myView2":{
+  //       component: HobbyListView,
+  //       path: function(){ return '/person/'+ this.persons.selectedPerson.id }
+  //     },
+  //     "myView3":{
+  //       viewDisplay: "Home",
+  //       component: HobbyListView,
+  //       path: '/home'
+  //     }
+  //   }
+  // },
 
   //dataContext keys define the dataContext names that will appear in
   //the View and associates a ViewModel.

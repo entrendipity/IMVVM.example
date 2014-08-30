@@ -85,15 +85,15 @@ var HobbiesViewModel = (function(){
       };
     },
 
-    getDisplays: function(){
-      return {
-        "hob View":{
-          viewDisplay: "TestDisplay",
-          component: HobbyListView,
-          path: "selectHobby"
-        }
-      }
-    },
+    // getDisplays: function(){
+    //   return {
+    //     "hob View":{
+    //       viewDisplay: "TestDisplay",
+    //       component: HobbyListView,
+    //       path: "selectHobby"
+    //     }
+    //   }
+    // },
 
     getRoutes: function(){
       return {

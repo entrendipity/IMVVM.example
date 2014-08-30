@@ -44,14 +44,14 @@ var PersonsViewModel = (function(){
       this.setState(nextState, {notify: "SideBarView"}, false);
     },
 
-    getDisplays: function(){
-      return {
-        "main":{
-          component: DetailsView,
-          path: function(){ return '/person/' + this.selectedPerson.id; }
-        }
-      }
-    },
+    // getDisplays: function(){
+    //   return {
+    //     "main":{
+    //       component: DetailsView,
+    //       path: function(){ return '/person/' + this.selectedPerson.id; }
+    //     }
+    //   }
+    // },
 
     getRoutes: function(){
       return {
