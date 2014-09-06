@@ -71,6 +71,10 @@ var HobbiesViewModel = (function(){
 
   var HobbiesViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
+    dataContextWillInitialize: function(){
+      console.log('This should only be called once.');
+    },
+
     getWatchedState: function() {
       return {
         'persons': {

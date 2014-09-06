@@ -9,7 +9,6 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   // mixins: [AstarisxAnimate],
 
   getInitialState: function(){ //optional
-    
     return {
       online: true,
       busy: false,
@@ -23,6 +22,10 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
     get: function(){
       return Astarisx.page.base();
     }
+  },
+
+  dataContextWillInitialize: function(){
+    this.initializeDataContext('persons');
   },
 
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */

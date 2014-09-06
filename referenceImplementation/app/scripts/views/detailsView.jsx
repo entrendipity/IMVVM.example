@@ -10,6 +10,11 @@
 
 var DetailsView = React.createClass({
 	mixins: [Astarisx.mixin.view],
+
+	componentWillMount: function(){
+		this.state.appContext.initializeDataContext('hobbies');
+	},
+
 	render: function() {
 		console.log('Details View rendered');
 		var display;
