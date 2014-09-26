@@ -4,7 +4,7 @@
 'use strict';
 
 var PersonsViewModel = (function(){
-  var personStateChangeHandler = function(nextState/*, callback*/){
+  var personStateChangeHandler = function(nextState, callback){
     var persons = {};
     persons.collection = this.collection.map(function(person){
       if(person.id === nextState.id){
@@ -13,10 +13,10 @@ var PersonsViewModel = (function(){
       }
       return person;
     });
-    /* 
+    /*
       to notify controllerView us "*" which is the predefined viewId
     */
-    this.setState(persons);
+    this.setState(persons, callback);
   };
 
   var Person = function(){
@@ -34,9 +34,11 @@ var PersonsViewModel = (function(){
   var PersonViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
     /* This is where you make ajax calls. You do not put ajax calls in getInitialState */
-    dataContextWillInitialize: function(){
+    dataContextWillInitialize: function(test){
       var nextState = {};
 
+      console.log('test arg');
+      console.log(test);
       nextState.collection = DataService.getPersonData().map(function(person, idx){
         return new Person(person, true);
       }.bind(this));
@@ -160,7 +162,7 @@ var PersonsViewModel = (function(){
       } else {
         if(!!this.selectedPerson){
           nextState.selectedPerson = void(0);
-        }        
+        }
         this.setState(nextState, {path: '/people'});
         return;
       }

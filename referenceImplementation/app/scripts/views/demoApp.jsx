@@ -13,7 +13,12 @@
 'use strict';
 var DemoApp = React.createClass({
   mixins: [Astarisx.mixin.ui, Astarisx.mixin.pushState, Astarisx.mixin.mediaQuery],
-
+  componentWillMount: function(){
+    this.initializeAppContext({
+      controllerViewModel: ControllerViewModel,
+      enableRouting: true
+    });
+  },
   render: function(){
 
     var display;

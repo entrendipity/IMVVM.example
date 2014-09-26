@@ -35,8 +35,12 @@ var HobbiesViewModel = (function(){
 
     this.setState(newState, function(){
       //This will invoke setState within the persons Data Context
-      this.state.personsContext.selectedPerson.hobbies = hobbiesArr;
-    }.bind(this));
+      this.state.personsContext.selectedPerson.updateHobby(newState.current);
+
+      //maybe test calling this.setState.call(this.state.personsContext, {});
+      //probably won't work because the caller has been bound and probably
+      //not a good idea anyway because it leads to spegetti
+    });
 
   };
 
@@ -195,7 +199,7 @@ var HobbiesViewModel = (function(){
         },
         function(){
           this.state.personsContext.selectedPerson.deleteHobby(value);
-        }.bind(this));
+        });
       } else {
         this.state.personsContext.selectedPerson.deleteHobby(value);
       }

@@ -27,7 +27,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   dataContextWillInitialize: function(){
     // this.initializeDataContext(['persons', 'hobbies']);
     // OR intialize ALL dataContexts
-    this.initializeDataContext();
+    this.initializeDataContext('*', 'testArgs');
   },
 
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
@@ -36,7 +36,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
       if(this.canRevert){
         this.setState({mql:mql, media: id, notify:'NavBarView'});
       } else {
-        this.setState({mql:mql, media: id, notify:'NavBarView'}, false);  
+        this.setState({mql:mql, media: id, notify:'NavBarView'}, false);
       }
     }
   },
@@ -129,7 +129,11 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
       return this.state.online;
     },
     set: function(newValue){
-      this.setState({'online': newValue });
+      //Testing 'this' context
+      this.setState({'online': newValue }, function(){
+        this.setState({'online': newValue });
+        console.log('testing this');
+      });
     }
   },
 

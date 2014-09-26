@@ -135,13 +135,20 @@ var PersonModel = (function(){
     gender: {
       get: function(){ return this.state.gender; },
       set: function(newValue){
-        this.setState({'gender': newValue});
+        //This is to test callback context
+        this.setState({}, function(){
+          console.log('test auto bind: Should show a Model');
+          console.log(this);
+          this.setState({'gender': newValue});
+        });
       }
     },
 
     hobbies: {
       kind: 'array',
       get: function(){ return this.state.hobbies; },
+      //set will be removed and is not accessible
+      //using updateHobby method to update a hobby
       set: function(newArray){
         this.setState({'hobbies': newArray});
       }
@@ -155,13 +162,24 @@ var PersonModel = (function(){
         }
       }
       arr = this.hobbies.slice(0);
-      this.hobbies = arr.concat(value);
+      this.setState({hobbies: arr.concat(value)});
+    },
+    updateHobby: function(obj){
+      var arr = this.hobbies.map(function(hobby){
+        if(hobby.id === obj.id){
+          return obj;
+        }
+        return hobby;
+      });
+      
+      this.setState({hobbies: arr});
     },
 
     deleteHobby: function(value){
-      this.hobbies = this.hobbies.filter(function(hobby){
+      var hobbies = this.hobbies.filter(function(hobby){
         return hobby.id !== value;
       });
+      this.setState({hobbies: hobbies});
     },
 
   });
