@@ -104,25 +104,25 @@ var PersonsViewModel = (function(){
       get: function(){ return this.state.collection; },
     },
 
-    selectPerson: function(id, next){
+    selectPerson: function(id, callback){
       var selectedPerson;
 
       if(!id){
           this.setState({selectedPerson: selectedPerson },
-            {path: '/people' }, next);
+            {path: '/people' }, callback);
             return;
       }
       for (var i = this.collection.length - 1; i >= 0; i--) {
         if(this.collection[i].id === id){
           selectedPerson = new Person(this.collection[i]);
           this.setState({ selectedPerson: selectedPerson },
-            {path: '/person/' + selectedPerson.id }, next);
+            {path: '/person/' + selectedPerson.id }, callback);
           break;
         }
       }
       if(!selectedPerson){
         this.setState({selectedPerson: selectedPerson },
-          {pageNotFound: true }, next);
+          {pageNotFound: true }, callback);
       }
     },
 
