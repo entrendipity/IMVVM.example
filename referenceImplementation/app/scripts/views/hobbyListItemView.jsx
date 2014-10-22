@@ -15,7 +15,7 @@ var HobbyListItemView = React.createClass({
     this.props.appContext.hobbies.selectHobby(this.props.hobby.id);
   },
   deleteHobby: function(e){
-    this.props.appContext.hobbies.deleteHobby(this.props.hobby.id);
+    this.props.appContext.persons.selectedPerson.deleteHobby(this.props.hobby.id);
   },
   render: function(){
     return (<a

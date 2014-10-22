@@ -6,14 +6,14 @@ var mixinViewModels = {
   persons: {
     viewModel: PersonsViewModel,
     get: function(){
-      return this.state.persons;
+      return this._state.persons;
     }
   },
 
   hobbies: {
     viewModel: HobbiesViewModel,
     get: function(){
-      return this.state.hobbies;
+      return this._state.hobbies;
     }
   },
 };
@@ -79,14 +79,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   // persons: {
   //   viewModel: PersonsViewModel,
   //   get: function(){
-  //     return this.state.persons;
+  //     return this._state.persons;
   //   }
   // },
 
   // hobbies: {
   //   viewModel: HobbiesViewModel,
   //   get: function(){
-  //     return this.state.hobbies;
+  //     return this._state.hobbies;
   //   }
   // },
 
@@ -100,14 +100,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   mql: {
     kind: "static",
     get: function(){
-      return this.state.mql;
+      return this._state.mql;
     }
   },
 
   media: {
     kind: "static",
     get: function(){
-      return this.state.media;
+      return this._state.media;
     }
   },
 
@@ -119,10 +119,10 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   */
   // path: {
   //   get: function(){
-  //     if(this.state.path){
-  //       return this.state.path;
+  //     if(this._state.path){
+  //       return this._state.path;
   //     }
-  //     return '/person/' + this.state.persons.selectedPerson.id;
+  //     return '/person/' + this._state.persons.selectedPerson.id;
   //   }
   // },
 
@@ -130,18 +130,18 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
     1. set directly with a setter. This exposes the busy field to the View
     2. set directly within a callback in a ViewModel. Need setter to be present
     3. 2nd arg in setState from ViewModel. Pass in {busy: true}
-    4. From a trigger. Return state object i.e. {busy: true}, to domain model to process
+    4. From a trigger. Return _state object i.e. {busy: true}, to domain model to process
   */
   busy: {
     get: function(){
-      return this.state.busy;
+      return this._state.busy;
     },
   },
 
   online: {
     kind: "static",
     get: function(){
-      return this.state.online;
+      return this._state.online;
     },
     set: function(newValue){
       //Testing 'this' context

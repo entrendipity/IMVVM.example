@@ -4,7 +4,8 @@
 'use strict';
 
 var PersonsViewModel = (function(){
-  var personStateChangeHandler = function(nextState, callback){
+  var personStateChangeHandler = function(nextState, nextAppState, callback){
+
     var persons = {};
     persons.collection = this.collection.map(function(person){
       if(person.id === nextState.id){
@@ -16,29 +17,24 @@ var PersonsViewModel = (function(){
     /*
       to notify controllerView us "*" which is the predefined viewId
     */
-    this.setState(persons, callback);
+    this.setState(persons, nextAppState, callback);
   };
 
   var Person = function(){
     return new PersonModel(personStateChangeHandler).apply(this, arguments);
   };
 
-  var personRouteHandler = function(params, path, pathId, ctx){
-    if(ctx.rollbackRequest){
-      ctx.revert();
-      return;
-    }
-      this.selectPerson(params.id);
+  var personRouteHandler = function(params, appContext, path, pathId, ctx){
+    //Do not call setState from within RouteHandlers
+    this.selectPerson(params.id);
   };
 
   var PersonViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
 
     /* This is where you make ajax calls. You do not put ajax calls in getInitialState */
-    dataContextWillInitialize: function(test){
+    dataContextWillInitialize: function(){
       var nextState = {};
 
-      console.log('test arg');
-      console.log(test);
       nextState.collection = DataService.getPersonData().map(function(person, idx){
         return new Person(person, true);
       }.bind(this));
@@ -82,26 +78,26 @@ var PersonsViewModel = (function(){
     imOnline: {
       kind:'pseudo',
       get: function(){
-        return this.state.imOnline;
+        return this._state.imOnline;
       }
     },
 
     selectedHobby: {
       kind: 'pseudo',
       get: function() {
-        return this.state.hobbiesContext.current ?
-          this.state.hobbiesContext.current.name: void(0);
+        return this._state.hobbiesContext.current ?
+          this._state.hobbiesContext.current.name: void(0);
       }
     },
 
     selectedPerson: {
       kind: 'instance',
-      get: function() { return this.state.selectedPerson; }
+      get: function() { return this._state.selectedPerson; }
     },
 
     collection: {
       kind: 'array',
-      get: function(){ return this.state.collection; },
+      get: function(){ return this._state.collection; },
     },
 
     selectPerson: function(id, callback){
@@ -167,7 +163,7 @@ var PersonsViewModel = (function(){
         return;
       }
       this.setState(nextState);
-    },
+    }
 
   });
 

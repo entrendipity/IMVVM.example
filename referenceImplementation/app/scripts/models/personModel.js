@@ -9,22 +9,6 @@ var PersonModel = (function(){
     return new HobbyClass().apply(this, arguments);
   };
 
-  var uuid = function () {
-    /*jshint bitwise:false */
-    var i, random;
-    var uuid = '';
-
-    for (i = 0; i < 32; i++) {
-      random = Math.random() * 16 | 0;
-      if (i === 8 || i === 12 || i === 16 || i === 20) {
-        uuid += '-';
-      }
-      uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random))
-        .toString(16);
-    }
-    return uuid;
-  };
-
   var calculateAge = function(dob){ // dob is a date
     var DOB = new Date(dob);
     var ageDate = new Date(Date.now() - DOB.getTime()); // miliseconds from
@@ -38,7 +22,7 @@ var PersonModel = (function(){
 
       var id, hobbies = [];
 
-      id = this.id || uuid();
+      id = this.id || Astarisx.uuid();
 
       hobbies = DataService.getHobbiesData(this.id).map(function(hobby){
         return new Hobby(hobby, true);
@@ -54,12 +38,12 @@ var PersonModel = (function(){
     id: {
       kind: 'uid',
       get: function(){
-        return this.state.id;
+        return this._state.id;
       }
     },
 
     firstName: {
-      get: function(){ return this.state.firstName; },
+      get: function(){ return this._state.firstName; },
       set: function(newValue){
         var nextState = {};
         nextState.firstName = newValue.length === 0 ? void(0) : newValue;
@@ -68,7 +52,7 @@ var PersonModel = (function(){
     },
 
     lastName: {
-      get: function(){ return this.state.lastName; },
+      get: function(){ return this._state.lastName; },
       set: function(newValue){
         var nextState = {};
         nextState.lastName = newValue.length === 0 ? void(0) : newValue;
@@ -101,7 +85,7 @@ var PersonModel = (function(){
     occupation: {
       aliasFor: 'job',
       get: function(){
-        return this.state.occupation;
+        return this._state.occupation;
       },
       set: function(newValue){
         this.setState({'occupation': newValue });
@@ -110,7 +94,7 @@ var PersonModel = (function(){
 
     dob: {
       get: function(){
-        return this.state.dob;
+        return this._state.dob;
       },
       set: function(newValue){
         var nextState = {};
@@ -128,12 +112,12 @@ var PersonModel = (function(){
     //Calculated field <- dob
     age: {
       get: function(){
-        return this.state.age;
+        return this._state.age;
       }
     },
 
     gender: {
-      get: function(){ return this.state.gender; },
+      get: function(){ return this._state.gender; },
       set: function(newValue){
         //This is to test callback context
         this.setState({}, function(){
@@ -146,7 +130,7 @@ var PersonModel = (function(){
 
     hobbies: {
       kind: 'array',
-      get: function(){ return this.state.hobbies; },
+      get: function(){ return this._state.hobbies; },
       //set will be removed and is not accessible
       //using updateHobby method to update a hobby
       set: function(newArray){
@@ -154,16 +138,6 @@ var PersonModel = (function(){
       }
     },
 
-    addHobby: function(value){
-      var arr;
-      for (var i = this.hobbies.length - 1; i >= 0; i--) {
-        if(this.hobbies[i].name === value.name){
-          return;
-        }
-      }
-      arr = this.hobbies.slice(0);
-      this.setState({hobbies: arr.concat(value)});
-    },
     updateHobby: function(obj){
       var arr = this.hobbies.map(function(hobby){
         if(hobby.id === obj.id){
@@ -175,11 +149,26 @@ var PersonModel = (function(){
       this.setState({hobbies: arr});
     },
 
-    deleteHobby: function(value){
+    addHobby: function(value){
+      var arr;
+      for (var i = this.hobbies.length - 1; i >= 0; i--) {
+        if(this.hobbies[i].name === value.name){
+          return;
+        }
+      }
+      arr = this.hobbies.slice(0);
+      this.setState({hobbies: arr.concat(new Hobby({ name:value }, true))});
+    },
+
+    deleteHobby: function(id){
       var hobbies = this.hobbies.filter(function(hobby){
-        return hobby.id !== value;
+        return hobby.id !== id;
       });
-      this.setState({hobbies: hobbies});
+      this.setState({hobbies: hobbies},{
+        busy: false,
+        path: '/person/' + this.id,
+        hobbies: { current: void(0) }
+      });
     },
 
   });

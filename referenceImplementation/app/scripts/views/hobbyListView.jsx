@@ -10,7 +10,7 @@
 
 var HobbyListView = React.createClass({
 	addHobby: function(value, e){
-		this.props.appContext.hobbies.addHobby(value);
+		this.props.appContext.persons.selectedPerson.addHobby(value);
 	},
   updateName: function(e){
     this.props.appContext.hobbies.current.name = e.target.value;
