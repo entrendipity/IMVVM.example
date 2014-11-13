@@ -59,12 +59,12 @@ var NavBarView = React.createClass({
             </ul>
 			      <form className="navbar-form pull-right" role="search">
 			        <button onClick={this.undo}
-								disabled={!this.state.appContext.canRevert}
+								disabled={!this.state.appContext.$canRevert}
 								className="btn btn-default btn-sm">
 			        Undo
 			        </button>
 			         <button onClick={this.redo}
-								disabled={!this.state.appContext.canAdvance}
+								disabled={!this.state.appContext.$canAdvance}
 								className="btn btn-default btn-sm">
 			        Redo
 			        </button>

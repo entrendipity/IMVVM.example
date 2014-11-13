@@ -2,9 +2,9 @@
   "name": "imvvmDemo",
   "dependencies": {
     "jquery": "~2.1.0",
-    "react": "~0.11.0",
+    "react": "~0.12.0",
     "twitter": "~3.1.0",
-    "astarisx": "~0.9.0-beta"
+    "astarisx": "~0.10.0-beta"
   },
   "version": "0.0.0",
   "homepage": "https://github.com/entrendipity/imvvm",

@@ -125,7 +125,7 @@ var HobbiesViewModel = (function(){
           },
           {
             busy: true,
-            path: '/person/'+ this._state.personsContext.selectedPerson.id +
+            $path: '/person/'+ this._state.personsContext.selectedPerson.id +
             '/hobby/'+this.hobbies[i].id
           });
           return;
@@ -135,13 +135,13 @@ var HobbiesViewModel = (function(){
             current: void(0)
           },
           {
-            pageNotFound: true 
+            $pageNotFound: true 
           });
     },
 
     getHobbies: function(person){
       return DataService.getHobbiesData(person.id).map(function(hobby){
-        return new Hobby(hobby, true);
+        return new Hobby(hobby);
       }.bind(this));
     }
   });

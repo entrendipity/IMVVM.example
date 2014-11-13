@@ -20,17 +20,19 @@ var PersonModel = (function(){
 
     getInitialState: function(){
 
-      var id, hobbies = [];
+      var hobbies = [];
 
-      id = this.id || Astarisx.uuid();
-
-      hobbies = DataService.getHobbiesData(this.id).map(function(hobby){
-        return new Hobby(hobby, true);
-      }.bind(this));
+      if(this.hobbies === void(0)){       
+        hobbies = DataService.getHobbiesData(this.id).map(function(hobby){
+          return new Hobby(hobby);
+        }.bind(this));
+      } else {
+        hobbies = this.hobbies;
+      }
 
       return {
-        age: calculateAge(this.dob),
-        id: id,
+        age: this.age || calculateAge(this.dob),
+        id: this.id || Astarisx.uuid(),
         hobbies: hobbies
       };
     },
@@ -131,11 +133,6 @@ var PersonModel = (function(){
     hobbies: {
       kind: 'array',
       get: function(){ return this._state.hobbies; },
-      //set will be removed and is not accessible
-      //using updateHobby method to update a hobby
-      set: function(newArray){
-        this.setState({'hobbies': newArray});
-      }
     },
 
     updateHobby: function(obj){
@@ -157,7 +154,9 @@ var PersonModel = (function(){
         }
       }
       arr = this.hobbies.slice(0);
-      this.setState({hobbies: arr.concat(new Hobby({ name:value }, true))});
+      this.setState({
+        hobbies: arr.concat(new Hobby({ name:value }))
+      });
     },
 
     deleteHobby: function(id){
@@ -166,7 +165,7 @@ var PersonModel = (function(){
       });
       this.setState({hobbies: hobbies},{
         busy: false,
-        path: '/person/' + this.id,
+        $path: '/person/' + this.id,
         hobbies: { current: void(0) }
       });
     },

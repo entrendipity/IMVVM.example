@@ -13,7 +13,7 @@ var PageNotFound = React.createClass({
   goBack: function(){    
     this.state.appContext.setState({
       forceReplace: true, 
-      path:'/people'
+      $path:'/people'
     });
   },
   render: function(){

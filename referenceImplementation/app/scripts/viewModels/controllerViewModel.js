@@ -28,7 +28,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
       online: true,
       busy: false,
       basePath: Astarisx.page.base('/basePath'),
-      path: '/people'
+      $path: '/people'
     };
   },
 
@@ -48,10 +48,10 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
   mediaChangeHandler: function(id, mql, initializing){
     if(mql.matches){
-      if(this.canRevert){
-        this.setState({mql:mql, media: id, notify:'NavBarView'});
+      if(this.$canRevert){
+        this.setState({mql:mql, media: id, $notify:'NavBarView'});
       } else {
-        this.setState({mql:mql, media: id, notify:'NavBarView'}, false);
+        this.setState({mql:mql, media: id, $notify:'NavBarView'}, false);
       }
     }
   },

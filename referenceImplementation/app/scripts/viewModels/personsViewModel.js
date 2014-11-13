@@ -5,7 +5,6 @@
 
 var PersonsViewModel = (function(){
   var personStateChangeHandler = function(nextState, nextAppState, callback){
-
     var persons = {};
     persons.collection = this.collection.map(function(person){
       if(person.id === nextState.id){
@@ -36,10 +35,10 @@ var PersonsViewModel = (function(){
       var nextState = {};
 
       nextState.collection = DataService.getPersonData().map(function(person, idx){
-        return new Person(person, true);
+        return new Person(person);
       }.bind(this));
 
-      this.setState(nextState, {notify: "SideBarView"}, false);
+      this.setState(nextState, {$notify: "SideBarView"}, false);
     },
 
     // getDisplays: function(){
@@ -105,20 +104,20 @@ var PersonsViewModel = (function(){
 
       if(!id){
           this.setState({selectedPerson: selectedPerson },
-            {path: '/people' }, callback);
+            {$path: '/people' }, callback);
             return;
       }
       for (var i = this.collection.length - 1; i >= 0; i--) {
         if(this.collection[i].id === id){
           selectedPerson = new Person(this.collection[i]);
           this.setState({ selectedPerson: selectedPerson },
-            {path: '/person/' + selectedPerson.id }, callback);
+            {$path: '/person/' + selectedPerson.id }, callback);
           break;
         }
       }
       if(!selectedPerson){
         this.setState({selectedPerson: selectedPerson },
-          {pageNotFound: true }, callback);
+          {$pageNotFound: true }, callback);
       }
     },
 
@@ -131,11 +130,11 @@ var PersonsViewModel = (function(){
         nextState.selectedPerson = new Person({
           firstName: name[0],
           lastName: name.slice(1).join(' ')
-        }, true);
+        });
         nextState.collection = this.collection.slice(0);
         nextState.collection = nextState.collection.concat(nextState.selectedPerson);
         this.setState(nextState,
-          {path: '/person/' + nextState.selectedPerson.id });
+          {$path: '/person/' + nextState.selectedPerson.id });
       }
     },
 
@@ -151,7 +150,7 @@ var PersonsViewModel = (function(){
           if(this.selectedPerson.id === uid){
             nextState.selectedPerson = void(0);
             this.setState(nextState, { enableUndo: true,
-              path: '/people'});
+              $path: '/people'});
               return;
           }
         }
@@ -159,7 +158,7 @@ var PersonsViewModel = (function(){
         if(!!this.selectedPerson){
           nextState.selectedPerson = void(0);
         }
-        this.setState(nextState, {path: '/people'});
+        this.setState(nextState, {$path: '/people'});
         return;
       }
       this.setState(nextState);
