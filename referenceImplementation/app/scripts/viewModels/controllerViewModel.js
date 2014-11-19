@@ -6,14 +6,14 @@ var mixinViewModels = {
   persons: {
     viewModel: PersonsViewModel,
     get: function(){
-      return this._state.persons;
+      return this.$state.persons;
     }
   },
 
   hobbies: {
     viewModel: HobbiesViewModel,
     get: function(){
-      return this._state.hobbies;
+      return this.$state.hobbies;
     }
   },
 };
@@ -79,14 +79,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   // persons: {
   //   viewModel: PersonsViewModel,
   //   get: function(){
-  //     return this._state.persons;
+  //     return this.$state.persons;
   //   }
   // },
 
   // hobbies: {
   //   viewModel: HobbiesViewModel,
   //   get: function(){
-  //     return this._state.hobbies;
+  //     return this.$state.hobbies;
   //   }
   // },
 
@@ -100,14 +100,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   mql: {
     kind: "static",
     get: function(){
-      return this._state.mql;
+      return this.$state.mql;
     }
   },
 
   media: {
     kind: "static",
     get: function(){
-      return this._state.media;
+      return this.$state.media;
     }
   },
 
@@ -119,10 +119,10 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   */
   // path: {
   //   get: function(){
-  //     if(this._state.path){
-  //       return this._state.path;
+  //     if(this.$state.path){
+  //       return this.$state.path;
   //     }
-  //     return '/person/' + this._state.persons.selectedPerson.id;
+  //     return '/person/' + this.$state.persons.selectedPerson.id;
   //   }
   // },
 
@@ -134,14 +134,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   */
   busy: {
     get: function(){
-      return this._state.busy;
+      return this.$state.busy;
     },
   },
 
   online: {
     kind: "static",
     get: function(){
-      return this._state.online;
+      return this.$state.online;
     },
     set: function(newValue){
       //Testing 'this' context

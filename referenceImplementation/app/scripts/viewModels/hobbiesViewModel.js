@@ -21,7 +21,7 @@ var HobbiesViewModel = (function(){
       //This will invoke setState within the persons Data Context
       appContext.persons.selectedPerson.updateHobby(newState.current);
 
-      //maybe test calling this.setState.call(this._state.personsContext, {});
+      //maybe test calling this.setState.call(this.$state.personsContext, {});
       //probably won't work because the caller has been bound and probably
       //not a good idea anyway because it leads to spegetti
     });
@@ -97,21 +97,21 @@ var HobbiesViewModel = (function(){
     hobbies: {
       kind: 'pseudo',
       get: function(){
-        return this._state.personsContext.selectedPerson ? this._state.personsContext.selectedPerson.hobbies : [];
+        return this.$state.personsContext.selectedPerson ? this.$state.personsContext.selectedPerson.hobbies : [];
       }
     },
 
     busyText: {
       kind: 'pseudo', //kind: 'pseudo' because its value is supplied externally
       get: function(){
-        return this._state.busy ? 'Im Busy! Go away...' : 'Not doing too much.';
+        return this.$state.busy ? 'Im Busy! Go away...' : 'Not doing too much.';
       }
     },
 
     current: {
       kind: 'instance',
       get: function(){
-        return this._state.current;
+        return this.$state.current;
       }
     },
 
@@ -125,7 +125,7 @@ var HobbiesViewModel = (function(){
           },
           {
             busy: true,
-            $path: '/person/'+ this._state.personsContext.selectedPerson.id +
+            $path: '/person/'+ this.$state.personsContext.selectedPerson.id +
             '/hobby/'+this.hobbies[i].id
           });
           return;
