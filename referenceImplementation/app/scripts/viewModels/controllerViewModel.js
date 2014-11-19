@@ -42,7 +42,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   dataContextWillInitialize: function(){
     // this.initializeDataContext(['persons', 'hobbies']);
     // OR intialize ALL dataContexts
-    // this.initializeDataContext('*', 'testArgs');
+    this.initializeDataContext('*', 'testArgs');
   },
 
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
