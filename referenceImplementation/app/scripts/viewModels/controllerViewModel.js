@@ -2,27 +2,12 @@
 /*jshint unused: false */
 /* global Astarisx, HobbiesViewModel, PersonsViewModel */
 'use strict';
-var mixinViewModels = {
-  persons: {
-    viewModel: PersonsViewModel,
-    get: function(){
-      return this.$state.persons;
-    }
-  },
-
-  hobbies: {
-    viewModel: HobbiesViewModel,
-    get: function(){
-      return this.$state.hobbies;
-    }
-  },
-};
 
 var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short form => createCVMClass()
 
   //imvvm-animate.js mixin
   // mixins: [AstarisxAnimate],
-  mixins: [mixinViewModels],
+
   getInitialState: function(){ //optional
     return {
       online: true,
@@ -40,9 +25,9 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   },
 
   dataContextWillInitialize: function(){
-    // this.initializeDataContext(['persons', 'hobbies']);
+    this.initializeDataContext(['persons', 'hobbies']);
     // OR intialize ALL dataContexts
-    this.initializeDataContext('*', 'testArgs');
+    // this.initializeDataContext('*', 'testArgs');
   },
 
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
@@ -76,19 +61,19 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
 
   // dataContext keys define the dataContext names that will appear in
   // the View and associates a ViewModel.
-  // persons: {
-  //   viewModel: PersonsViewModel,
-  //   get: function(){
-  //     return this.$state.persons;
-  //   }
-  // },
+  persons: {
+    viewModel: PersonsViewModel,
+    get: function(){
+      return this.$state.persons;
+    }
+  },
 
-  // hobbies: {
-  //   viewModel: HobbiesViewModel,
-  //   get: function(){
-  //     return this.$state.hobbies;
-  //   }
-  // },
+  hobbies: {
+    viewModel: HobbiesViewModel,
+    get: function(){
+      return this.$state.hobbies;
+    }
+  },
 
   personCount: {
     kind:'pseudo',

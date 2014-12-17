@@ -10,6 +10,9 @@ var PersonModel = (function(){
   };
 
   var calculateAge = function(dob){ // dob is a date
+    if(dob === void(0) || dob.length < 10){
+      return 'Enter your Birthday';
+    }
     var DOB = new Date(dob);
     var ageDate = new Date(Date.now() - DOB.getTime()); // miliseconds from
     var age = Math.abs(ageDate.getFullYear() - 1970);
@@ -31,7 +34,7 @@ var PersonModel = (function(){
       }
 
       return {
-        age: this.age || calculateAge(this.dob),
+        age: calculateAge(this.dob),
         id: this.id || Astarisx.uuid(),
         hobbies: hobbies
       };
@@ -99,22 +102,15 @@ var PersonModel = (function(){
         return this.$state.dob;
       },
       set: function(newValue){
-        var nextState = {};
-        if(newValue.length === 10){
-          nextState.age = calculateAge(newValue);
-        }
-        if(newValue.length === 0){
-          nextState.age = 'C\'mon. When\'s your Birthday?';
-        }
-        nextState.dob = newValue;
-        this.setState(nextState);
+        this.setState({'dob': newValue});
       }
     },
 
     //Calculated field <- dob
     age: {
+      kind: 'pseudo',
       get: function(){
-        return this.$state.age;
+        return calculateAge(this.dob);
       }
     },
 

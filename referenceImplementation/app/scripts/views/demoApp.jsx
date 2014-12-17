@@ -16,6 +16,7 @@ var DemoApp = React.createClass({
   componentWillMount: function(){
     this.initializeAppContext({
       controllerViewModel: ControllerViewModel,
+      // enableUndo: true
       enableRouting: true
     });
   },
