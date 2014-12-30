@@ -3,9 +3,9 @@ Astarisx Reference Implementation
 
 Astarisx is a Highly Composable Application Architecture for building modern client-side web applications with [React](http://facebook.github.io/react/). 
 
-This example application is a reference implementation to be read with the [Developer's Guide](https://github.com/entrendipity/astarisx/wiki/Developer's-Guide). It is a little contrived and not necessarily the way you would strucuture your application, but it uses most of the API to demonstrate how each function is used. 
+It is a little contrived and not necessarily the way you would strucuture your application, but it uses most of the API to demonstrate how each function is used. 
 
-Astarisx Documentation can be found [here.](https://github.com/entrendipity/astarisx/wiki)  
+Astarisx Documentation can be found [here.](http://entrendipity.github.io/astarisx/)  
 #### Screen shot
 ![Screen shot](/referenceImplementation/ScreenShot_Example.png?raw=true)
 
@@ -27,7 +27,7 @@ Frank Panetta  - [Follow @fattenap](https://twitter.com/intent/follow?screen_nam
 ##License
 ###The MIT License (MIT)
 
-Copyright (c) 2014 Entrendipity
+Copyright (c) 2014-2015 Entrendipity Pty Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
