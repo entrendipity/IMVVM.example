@@ -30,7 +30,7 @@ var HobbiesViewModel = (function(){
 
   //Use this if _state change is triggered by others action
   var onPersonChangeHandler = function(nextState, prevState, field, context,
-      nextPath, prevPath){
+      appCtx, nextPath, prevPath){
 
     if(this.current !== void(0) && context === 'persons' &&
       (nextState === void(0) || nextState.id !== prevState.id || nextPath !== prevPath)){

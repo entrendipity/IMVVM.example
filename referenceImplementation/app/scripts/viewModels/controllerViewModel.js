@@ -25,13 +25,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   },
 
   dataContextWillInitialize: function(){
-    this.initializeDataContext(['persons', 'hobbies']);
-    // OR intialize ALL dataContexts
-    // this.initializeDataContext('*', 'testArgs');
+    this.initializeDataContext('*');
+  //   this.initializeDataContext(['persons', 'hobbies']);
+  //   // OR intialize ALL dataContexts
+  //   // this.initializeDataContext('*', 'testArgs');
   },
 
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
-  mediaChangeHandler: function(id, mql, initializing){
+  mediaQueryWillUpdate: function(id, mql, initializing){
     if(mql.matches){
       if(this.$canRevert){
         this.setState({mql:mql, media: id, $notify:'NavBarView'});
