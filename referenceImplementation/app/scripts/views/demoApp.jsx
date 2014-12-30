@@ -13,7 +13,13 @@
 'use strict';
 var DemoApp = React.createClass({
   mixins: [Astarisx.mixin.ui, Astarisx.mixin.pushState, Astarisx.mixin.mediaQuery],
-
+  componentWillMount: function(){
+    this.initializeAppContext({
+      controllerViewModel: ControllerViewModel,
+      // enableUndo: true
+      enableRouting: true
+    });
+  },
   render: function(){
 
     var display;
@@ -21,18 +27,18 @@ var DemoApp = React.createClass({
     console.log('------------------------------------------ Current Application State ------------------------------------------')
     console.log(this.state.appContext);
 
-    if(this.state.appContext.pageNotFound){
+    if(this.state.appContext.$pageNotFound){
       display = <PageNotFound />;
     } else {
       display = (<div>
-        <NavBarView viewKey={"NavBarView"} />
+        <NavBarView $viewKey={"NavBarView"} />
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <SideBarView viewKey={"SideBarView"}/>
+              <SideBarView $viewKey={"SideBarView"}/>
             </div>
             <div className="col-md-8">
-              <DetailsView viewKey={"DetailsView"} />
+              <DetailsView $viewKey={"DetailsView"} />
             </div>
           </div>
         </div>

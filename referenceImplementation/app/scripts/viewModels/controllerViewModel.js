@@ -13,7 +13,7 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
       online: true,
       busy: false,
       basePath: Astarisx.page.base('/basePath'),
-      path: '/people'
+      $path: '/people'
     };
   },
 
@@ -25,18 +25,19 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   },
 
   dataContextWillInitialize: function(){
-    // this.initializeDataContext(['persons', 'hobbies']);
-    // OR intialize ALL dataContexts
-    this.initializeDataContext();
+    this.initializeDataContext('*');
+  //   this.initializeDataContext(['persons', 'hobbies']);
+  //   // OR intialize ALL dataContexts
+  //   // this.initializeDataContext('*', 'testArgs');
   },
 
   /* Required if mediaQuery Astarisx.mixin.mediaQuery is used */
-  mediaChangeHandler: function(id, mql, initializing){
+  mediaQueryWillUpdate: function(id, mql, initializing){
     if(mql.matches){
-      if(this.canRevert){
-        this.setState({mql:mql, media: id, notify:'NavBarView'});
+      if(this.$canRevert){
+        this.setState({mql:mql, media: id, $notify:'NavBarView'});
       } else {
-        this.setState({mql:mql, media: id, notify:'NavBarView'}, false);  
+        this.setState({mql:mql, media: id, $notify:'NavBarView'}, false);
       }
     }
   },
@@ -59,19 +60,19 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   //   }
   // },
 
-  //dataContext keys define the dataContext names that will appear in
-  //the View and associates a ViewModel.
+  // dataContext keys define the dataContext names that will appear in
+  // the View and associates a ViewModel.
   persons: {
     viewModel: PersonsViewModel,
     get: function(){
-      return this.state.persons;
+      return this.$state.persons;
     }
   },
 
   hobbies: {
     viewModel: HobbiesViewModel,
     get: function(){
-      return this.state.hobbies;
+      return this.$state.hobbies;
     }
   },
 
@@ -85,14 +86,14 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   mql: {
     kind: "static",
     get: function(){
-      return this.state.mql;
+      return this.$state.mql;
     }
   },
 
   media: {
     kind: "static",
     get: function(){
-      return this.state.media;
+      return this.$state.media;
     }
   },
 
@@ -104,10 +105,10 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
   */
   // path: {
   //   get: function(){
-  //     if(this.state.path){
-  //       return this.state.path;
+  //     if(this.$state.path){
+  //       return this.$state.path;
   //     }
-  //     return '/person/' + this.state.persons.selectedPerson.id;
+  //     return '/person/' + this.$state.persons.selectedPerson.id;
   //   }
   // },
 
@@ -115,21 +116,25 @@ var ControllerViewModel = Astarisx.createControllerViewModelClass({ // short for
     1. set directly with a setter. This exposes the busy field to the View
     2. set directly within a callback in a ViewModel. Need setter to be present
     3. 2nd arg in setState from ViewModel. Pass in {busy: true}
-    4. From a trigger. Return state object i.e. {busy: true}, to domain model to process
+    4. From a trigger. Return _state object i.e. {busy: true}, to domain model to process
   */
   busy: {
     get: function(){
-      return this.state.busy;
+      return this.$state.busy;
     },
   },
 
   online: {
     kind: "static",
     get: function(){
-      return this.state.online;
+      return this.$state.online;
     },
     set: function(newValue){
-      this.setState({'online': newValue });
+      //Testing 'this' context
+      this.setState({'online': newValue }, function(){
+        this.setState({'online': newValue });
+        console.log('testing this');
+      });
     }
   },
 

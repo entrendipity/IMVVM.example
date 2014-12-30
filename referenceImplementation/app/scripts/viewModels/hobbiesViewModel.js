@@ -5,22 +5,6 @@
 
 var HobbiesViewModel = (function(){
 
-  var uuid = function () {
-    /*jshint bitwise:false */
-    var i, random;
-    var uuid = '';
-
-    for (i = 0; i < 32; i++) {
-      random = Math.random() * 16 | 0;
-      if (i === 8 || i === 12 || i === 16 || i === 20) {
-        uuid += '-';
-      }
-      uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random))
-        .toString(16);
-    }
-    return uuid;
-  };
-
   var hobbyStateChangeHandler = function(nextState/*, callback*/){
 
     var newState = {};
@@ -33,16 +17,21 @@ var HobbiesViewModel = (function(){
       return hobby;
     }.bind(this));
 
-    this.setState(newState, function(){
+    this.setState(newState, function(err, appContext){
       //This will invoke setState within the persons Data Context
-      this.state.personsContext.selectedPerson.hobbies = hobbiesArr;
-    }.bind(this));
+      appContext.persons.selectedPerson.updateHobby(newState.current);
+
+      //maybe test calling this.setState.call(this.$state.personsContext, {});
+      //probably won't work because the caller has been bound and probably
+      //not a good idea anyway because it leads to spegetti
+    });
 
   };
 
-  //Use this if state change is triggered by others action
+  //Use this if _state change is triggered by others action
   var onPersonChangeHandler = function(nextState, prevState, field, context,
-      nextPath, prevPath){
+      appCtx, nextPath, prevPath){
+
     if(this.current !== void(0) && context === 'persons' &&
       (nextState === void(0) || nextState.id !== prevState.id || nextPath !== prevPath)){
       return { hobbies: { current: void(0) }, busy: false };
@@ -53,14 +42,11 @@ var HobbiesViewModel = (function(){
     return new HobbyClass(hobbyStateChangeHandler).apply(this, arguments);
   };
 
-  var hobbyRouteHandler = function(params, path, pathId, ctx){
-    if(ctx.rollbackRequest){
-      ctx.revert();
-      return;
-    }
-    if(this.state.personsContext.selectedPerson === void(0) && ('id' in params) ||
-      this.state.personsContext.selectedPerson.id != params.id){
-      this.state.personsContext.selectPerson(params.id, function(){
+  var hobbyRouteHandler = function(params, appContext, path, pathId, ctx){
+
+    if(appContext.persons.selectedPerson === void(0) && ('id' in params) ||
+      appContext.persons.selectedPerson.id != params.id){
+      appContext.persons.selectPerson(params.id, function(){
         this.selectHobby(params.hobbyId);
       }.bind(this));
     } else {
@@ -111,21 +97,21 @@ var HobbiesViewModel = (function(){
     hobbies: {
       kind: 'pseudo',
       get: function(){
-        return this.state.personsContext.selectedPerson.hobbies;
+        return this.$state.personsContext.selectedPerson ? this.$state.personsContext.selectedPerson.hobbies : [];
       }
     },
 
     busyText: {
       kind: 'pseudo', //kind: 'pseudo' because its value is supplied externally
       get: function(){
-        return this.state.busy ? 'Im Busy! Go away...' : 'Not doing too much.';
+        return this.$state.busy ? 'Im Busy! Go away...' : 'Not doing too much.';
       }
     },
 
     current: {
       kind: 'instance',
       get: function(){
-        return this.state.current;
+        return this.$state.current;
       }
     },
 
@@ -139,66 +125,24 @@ var HobbiesViewModel = (function(){
           },
           {
             busy: true,
-            path: '/person/'+ this.state.personsContext.selectedPerson.id +
+            $path: '/person/'+ this.$state.personsContext.selectedPerson.id +
             '/hobby/'+this.hobbies[i].id
           });
-
-          /*
-            //OR use a callback
-            this.setState({current: new Hobby(this.hobbies[i])}, function(){
-              this.setState({}, {busy: true});
-            }.bind(this));
-          */
-
-          break;
+          return;
         }
       }
-    },
-
-    // Not necessarily how I would code this
-    // It probably should be in the persons data context
-    addHobby: function(value){
-      if(value !== ''){
-        this.state.personsContext.selectedPerson.
-        addHobby(new Hobby({ id: uuid(), name:value }, true));
-      }
+      this.setState({
+            current: void(0)
+          },
+          {
+            $pageNotFound: true 
+          });
     },
 
     getHobbies: function(person){
       return DataService.getHobbiesData(person.id).map(function(hobby){
-        return new Hobby(hobby, true);
+        return new Hobby(hobby);
       }.bind(this));
-    },
-
-    // Not necessarily how I would code this
-    // It probably should be in the persons data context
-    deleteHobby: function(value){
-      /*
-
-        If we were to simply call
-
-              this.state.personsContext.selectedPerson.deleteHobby(value);
-
-        then Astarisx is notified that the call was made from the 'persons' context
-        and not from the 'hobbies' context. Therefore any subscribers to 'hobbies.current'
-        are unaware of changes to 'hobbies.current'.
-
-        If the selected hobby is deleted, then call setState from 'hobbies' ViewModel,
-        so that the 'persons' context gets updated and busy can be set on the 'domain'
-
-       */
-
-      if(this.current && this.current.id === value){
-        this.setState({ current: void(0) }, {
-          busy: false,
-          path: '/person/' + this.state.personsContext.selectedPerson.id
-        },
-        function(){
-          this.state.personsContext.selectedPerson.deleteHobby(value);
-        }.bind(this));
-      } else {
-        this.state.personsContext.selectedPerson.deleteHobby(value);
-      }
     }
   });
   return HobbiesViewModelClass;

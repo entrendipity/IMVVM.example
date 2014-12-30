@@ -10,7 +10,7 @@
 
 var HobbyListView = React.createClass({
 	addHobby: function(value, e){
-		this.props.appContext.hobbies.addHobby(value);
+		this.props.appContext.persons.selectedPerson.addHobby(value);
 	},
   updateName: function(e){
     this.props.appContext.hobbies.current.name = e.target.value;
@@ -23,7 +23,7 @@ var HobbyListView = React.createClass({
 	},
 	render: function() {
 		var app = this.props.appContext;
-		var collection = this.props.appContext.hobbies.hobbies;
+		var collection = this.props.appContext.persons.selectedPerson ? this.props.appContext.persons.selectedPerson.hobbies : [];
 		var current = this.props.appContext.hobbies.current;
 
 		var list = collection.map(function(hobby){

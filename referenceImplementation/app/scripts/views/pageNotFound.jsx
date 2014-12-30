@@ -9,8 +9,12 @@
 'use strict';
 
 var PageNotFound = React.createClass({
-  goBack: function(){
-    history.back();
+  mixins: [Astarisx.mixin.view],
+  goBack: function(){    
+    this.state.appContext.setState({
+      forceReplace: true, 
+      $path:'/people'
+    });
   },
   render: function(){
     return (

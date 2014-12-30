@@ -4,7 +4,7 @@
 'use strict';
 
 var PersonsViewModel = (function(){
-  var personStateChangeHandler = function(nextState/*, callback*/){
+  var personStateChangeHandler = function(nextState, nextAppState, callback){
     var persons = {};
     persons.collection = this.collection.map(function(person){
       if(person.id === nextState.id){
@@ -13,22 +13,19 @@ var PersonsViewModel = (function(){
       }
       return person;
     });
-    /* 
+    /*
       to notify controllerView us "*" which is the predefined viewId
     */
-    this.setState(persons);
+    this.setState(persons, nextAppState, callback);
   };
 
   var Person = function(){
     return new PersonModel(personStateChangeHandler).apply(this, arguments);
   };
 
-  var personRouteHandler = function(params, path, pathId, ctx){
-    if(ctx.rollbackRequest){
-      ctx.revert();
-      return;
-    }
-      this.selectPerson(params.id);
+  var personRouteHandler = function(params, appContext, path, pathId, ctx){
+    //Do not call setState from within RouteHandlers
+    this.selectPerson(params.id);
   };
 
   var PersonViewModelClass = Astarisx.createViewModelClass({  //short form => createVMClass()
@@ -38,10 +35,10 @@ var PersonsViewModel = (function(){
       var nextState = {};
 
       nextState.collection = DataService.getPersonData().map(function(person, idx){
-        return new Person(person, true);
+        return new Person(person);
       }.bind(this));
 
-      this.setState(nextState, {notify: "SideBarView"}, false);
+      this.setState(nextState, {$notify: "SideBarView"}, false);
     },
 
     // getDisplays: function(){
@@ -80,47 +77,47 @@ var PersonsViewModel = (function(){
     imOnline: {
       kind:'pseudo',
       get: function(){
-        return this.state.imOnline;
+        return this.$state.imOnline;
       }
     },
 
     selectedHobby: {
       kind: 'pseudo',
       get: function() {
-        return this.state.hobbiesContext.current ?
-          this.state.hobbiesContext.current.name: void(0);
+        return this.$state.hobbiesContext.current ?
+          this.$state.hobbiesContext.current.name: void(0);
       }
     },
 
     selectedPerson: {
       kind: 'instance',
-      get: function() { return this.state.selectedPerson; }
+      get: function() { return this.$state.selectedPerson; }
     },
 
     collection: {
       kind: 'array',
-      get: function(){ return this.state.collection; },
+      get: function(){ return this.$state.collection; },
     },
 
-    selectPerson: function(id, next){
+    selectPerson: function(id, callback){
       var selectedPerson;
 
       if(!id){
           this.setState({selectedPerson: selectedPerson },
-            {path: '/people' }, next);
+            {$path: '/people' }, callback);
             return;
       }
       for (var i = this.collection.length - 1; i >= 0; i--) {
         if(this.collection[i].id === id){
           selectedPerson = new Person(this.collection[i]);
           this.setState({ selectedPerson: selectedPerson },
-            {path: '/person/' + selectedPerson.id }, next);
+            {$path: '/person/' + selectedPerson.id }, callback);
           break;
         }
       }
       if(!selectedPerson){
         this.setState({selectedPerson: selectedPerson },
-          {pageNotFound: true }, next);
+          {$pageNotFound: true }, callback);
       }
     },
 
@@ -133,11 +130,11 @@ var PersonsViewModel = (function(){
         nextState.selectedPerson = new Person({
           firstName: name[0],
           lastName: name.slice(1).join(' ')
-        }, true);
+        });
         nextState.collection = this.collection.slice(0);
         nextState.collection = nextState.collection.concat(nextState.selectedPerson);
         this.setState(nextState,
-          {path: '/person/' + nextState.selectedPerson.id });
+          {$path: '/person/' + nextState.selectedPerson.id });
       }
     },
 
@@ -153,19 +150,19 @@ var PersonsViewModel = (function(){
           if(this.selectedPerson.id === uid){
             nextState.selectedPerson = void(0);
             this.setState(nextState, { enableUndo: true,
-              path: '/people'});
+              $path: '/people'});
               return;
           }
         }
       } else {
         if(!!this.selectedPerson){
           nextState.selectedPerson = void(0);
-        }        
-        this.setState(nextState, {path: '/people'});
+        }
+        this.setState(nextState, {$path: '/people'});
         return;
       }
       this.setState(nextState);
-    },
+    }
 
   });
 
